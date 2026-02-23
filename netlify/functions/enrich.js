@@ -179,7 +179,7 @@ ${solution}
   const fileSha = existing.status === 200 ? existing.body.sha : undefined;
 
   const filePayload = {
-    message: `✅ Add solution: ${meta.problem_name} (LC #${meta.problem_number}) ${starStr}`,
+    message: `leetcode buddy: add solution: ${meta.problem_name} (LC #${meta.problem_number}) ${starStr}`,
     content: Buffer.from(fileContent).toString("base64"),
     ...(fileSha ? { sha: fileSha } : {}),
   };
@@ -207,7 +207,7 @@ ${solution}
   const newContent = currentContent.trimEnd() + "\n" + meta.patterns_md_entry + "\n";
 
   const patternsPayload = {
-    message: `Update patterns.md: ${meta.problem_name}`,
+    message: `leetcode buddy: update patterns.md: ${meta.problem_name}`,
     content: Buffer.from(newContent).toString("base64"),
     ...(patternsSha ? { sha: patternsSha } : {}),
   };
