@@ -4,72 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeetCode Master Plan</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
-:root {
-  --bg: #080810;
-  --surface: #10101c;
-  --surface2: #16162a;
-  --border: #22223a;
-  --border2: #2e2e50;
-  --text: #e4e4f0;
-  --muted: #5a5a7a;
-  --p1: #00ff87;
-  --p2: #38bdf8;
-  --p3: #fb923c;
-  --gold: #fbbf24;
-  --easy: #00ff87;
-  --med: #fbbf24;
-  --hard: #f87171;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Syne',sans-serif;
-  min-height:100vh;
-  line-height:1.6;
-}
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 5%, rgba(0,255,135,.05) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 40% at 85% 95%, rgba(56,189,248,.04) 0%,transparent 55%);
-  pointer-events:none;
-  z-index:0;
-}
-
-/* ─── LAYOUT ─── */
+:root{--bg:#080810;--surface:#10101c;--surface2:#16162a;--border:#22223a;--border2:#2e2e50;--text:#e4e4f0;--muted:#5a5a7a;--p1:#00ff87;--p2:#38bdf8;--p3:#fb923c;--gold:#fbbf24;--easy:#00ff87;--med:#fbbf24;--hard:#f87171;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 15% 5%,rgba(0,255,135,.05) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 95%,rgba(56,189,248,.04) 0%,transparent 55%);pointer-events:none;z-index:0;}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
-
-/* ─── HEADER ─── */
-header{padding:52px 0 36px;border-bottom:1px solid var(--border);margin-bottom:40px;}
+header{padding:52px 0 36px;border-bottom:1px solid var(--border);}
 .tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--p1);text-transform:uppercase;margin-bottom:14px;}
 h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.05;letter-spacing:-.025em;margin-bottom:10px;}
 h1 em{font-style:normal;color:var(--p1);}
 .header-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-top:6px;}
 .header-meta span{color:var(--text);}
-
-/* ─── STATS GRID ─── */
+.tabs{display:flex;gap:4px;padding:20px 0 0;border-bottom:1px solid var(--border);margin-bottom:32px;}
+.tab{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;padding:10px 20px;border-radius:8px 8px 0 0;cursor:pointer;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s;text-transform:uppercase;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--p1);border-color:var(--border);border-bottom:1px solid var(--bg);background:var(--bg);margin-bottom:-1px;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px;}
 @media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr);}}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 12px;text-align:center;}
 .stat-n{font-size:1.75rem;font-weight:800;line-height:1;margin-bottom:4px;}
 .stat-l{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
-.c-easy{color:var(--easy);}
-.c-med{color:var(--med);}
-.c-hard{color:var(--hard);}
-.c-p2{color:var(--p2);}
-.c-gold{color:var(--gold);}
-
-/* ─── MASTER BAR ─── */
+.c-easy{color:var(--easy);}.c-med{color:var(--med);}.c-hard{color:var(--hard);}.c-p2{color:var(--p2);}.c-gold{color:var(--gold);}
 .master{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:24px;}
 .master-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.master-title{font-weight:700;font-size:.95rem;}
-.master-pct{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--p1);}
+.master-title{font-weight:700;font-size:.95rem;}.master-pct{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--p1);}
 .bar{height:10px;background:var(--border2);border-radius:99px;overflow:hidden;margin-bottom:18px;}
 .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p1),var(--p2));transition:width .5s ease;}
 .phase-bars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
@@ -77,21 +39,14 @@ h1 em{font-style:normal;color:var(--p1);}
 .pb-label b{color:var(--text);font-weight:400;}
 .pb{height:5px;background:var(--border2);border-radius:99px;overflow:hidden;}
 .pb-fill{height:100%;border-radius:99px;transition:width .5s ease;}
-.fill-p1{background:var(--p1);}
-.fill-p2{background:var(--p2);}
-.fill-p3{background:var(--p3);}
-
-/* ─── STREAK ─── */
+.fill-p1{background:var(--p1);}.fill-p2{background:var(--p2);}.fill-p3{background:var(--p3);}
 .streak{background:linear-gradient(135deg,rgba(251,191,36,.07),rgba(251,191,36,.02));border:1px solid rgba(251,191,36,.18);border-radius:12px;padding:14px 22px;margin-bottom:40px;display:flex;align-items:center;gap:14px;}
-.streak-icon{font-size:1.5rem;}
-.streak-copy{flex:1;}
+.streak-icon{font-size:1.5rem;}.streak-copy{flex:1;}
 .streak-big{font-family:'Space Mono',monospace;font-size:13px;color:var(--gold);font-weight:700;}
 .streak-small{font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;}
 .streak-btn{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25);color:var(--gold);font-family:'Space Mono',monospace;font-size:11px;padding:7px 14px;border-radius:8px;cursor:pointer;transition:background .2s;}
 .streak-btn:hover{background:rgba(251,191,36,.22);}
-
-/* ─── PHASE BLOCKS ─── */
-.phase{border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:28px;transition:border-color .2s;}
+.phase{border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:28px;}
 .phase:hover{border-color:var(--border2);}
 .phase-hdr{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;cursor:pointer;user-select:none;background:var(--surface);transition:background .2s;gap:14px;}
 .phase-hdr:hover{background:var(--surface2);}
@@ -101,7 +56,7 @@ h1 em{font-style:normal;color:var(--p1);}
 .badge-p2{color:var(--p2);border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.06);}
 .badge-p3{color:var(--p3);border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.06);}
 .phase-titles{min-width:0;}
-.phase-name{font-size:1.05rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.phase-name{font-size:1.05rem;font-weight:800;}
 .phase-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
 .phase-hdr-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
 .phase-stat{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
@@ -110,85 +65,150 @@ h1 em{font-style:normal;color:var(--p1);}
 .phase.open .chevron{transform:rotate(-135deg);}
 .phase-body{display:none;padding:4px 26px 26px;background:var(--surface);}
 .phase.open .phase-body{display:block;}
-
-/* ─── GOAL BOX ─── */
 .goal-box{border-left:3px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0 22px;font-size:13px;color:var(--muted);font-style:italic;}
 .goal-p1{border-color:var(--p1);background:rgba(0,255,135,.04);}
 .goal-p2{border-color:var(--p2);background:rgba(56,189,248,.04);}
 .goal-p3{border-color:var(--p3);background:rgba(251,146,60,.04);}
-
-/* ─── MILESTONES ─── */
 .milestones{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
 .milestone{font-family:'Space Mono',monospace;font-size:10px;padding:5px 12px;border-radius:99px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);}
-
-/* ─── WEEK ─── */
 .week{margin-bottom:26px;}
 .week-hdr{display:flex;align-items:baseline;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:14px;}
 .week-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;}
 .week-name{font-size:.95rem;font-weight:700;}
 .week-count{margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
-
-/* ─── SCHEDULE ─── */
 .schedule{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:18px;}
 .schedule-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
 .srow{display:flex;gap:10px;font-size:12px;margin-bottom:5px;align-items:flex-start;}
 .srow:last-child{margin-bottom:0;}
 .stime{font-family:'Space Mono',monospace;font-size:10px;color:var(--p2);min-width:80px;padding-top:1px;flex-shrink:0;}
-
-/* ─── TIPS ─── */
 .tips{margin-bottom:14px;}
 .tips-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
 .tip{display:flex;gap:8px;font-size:12px;margin-bottom:5px;opacity:.85;}
-.tip::before{content:'→';color:var(--p1);font-family:'Space Mono',monospace;flex-shrink:0;}
-
-/* ─── PROBLEMS ─── */
+.tip::before{content:'to';color:var(--p1);font-family:'Space Mono',monospace;flex-shrink:0;}
 .diff-hdr{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:7px;}
 .dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
-.dot-easy{background:var(--easy);}
-.dot-med{background:var(--med);}
-.dot-hard{background:var(--hard);}
+.dot-easy{background:var(--easy);}.dot-med{background:var(--med);}.dot-hard{background:var(--hard);}
 .prob-list{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;}
 .prob{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:var(--bg);border:1px solid transparent;cursor:pointer;transition:all .15s;font-size:12.5px;}
 .prob:hover{border-color:var(--border);}
 .prob.done{opacity:.4;text-decoration:line-through;}
 .prob.done .chk{background:var(--p1);border-color:var(--p1);}
-.prob.done .chk::after{content:'✓';color:var(--bg);font-size:9px;font-weight:700;}
+.prob.done .chk::after{content:'v';color:var(--bg);font-size:9px;font-weight:700;}
 .chk{width:16px;height:16px;border-radius:4px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .prob-name{flex:1;}
 .prob-link{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);text-decoration:none;margin-left:auto;padding:2px 8px;border-radius:4px;border:1px solid var(--border);transition:all .15s;white-space:nowrap;}
 .prob-link:hover{border-color:var(--p2);color:var(--p2);}
-
-/* ─── CHEAT SHEET ─── */
 .cheatsheet{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:40px;}
-.cs-title{font-weight:800;font-size:1rem;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
-.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.cs-title{font-weight:800;font-size:1rem;margin-bottom:18px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
 .cs-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;}
 .cs-card-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--p1);margin-bottom:8px;}
 .cs-card pre{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);white-space:pre-wrap;line-height:1.6;}
-
-/* ─── FOOTER ─── */
+/* PASSWORD GATE */
+.pw-gate{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:48px 36px;text-align:center;max-width:420px;margin:40px auto;}
+.pw-gate-icon{font-size:2.5rem;margin-bottom:16px;}
+.pw-gate-title{font-size:1.2rem;font-weight:800;margin-bottom:8px;}
+.pw-gate-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+.pw-input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:14px;padding:12px 16px;outline:none;text-align:center;letter-spacing:.2em;margin-bottom:12px;transition:border-color .2s;}
+.pw-input:focus{border-color:var(--p1);}
+.pw-btn{width:100%;padding:13px;background:var(--p1);color:var(--bg);font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s;margin-bottom:20px;}
+.pw-btn:hover{opacity:.88;}
+.pw-btn:disabled{opacity:.5;cursor:not-allowed;}
+.pw-err{font-family:'Space Mono',monospace;font-size:11px;color:var(--hard);margin-bottom:12px;display:none;}
+.divider{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.divider-line{flex:1;height:1px;background:var(--border);}
+.divider-text{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.req-btn{width:100%;padding:12px;background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;letter-spacing:.05em;}
+.req-btn:hover{border-color:var(--p2);color:var(--p2);}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:36px;width:100%;max-width:420px;position:relative;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--text);}
+.modal-title{font-size:1.1rem;font-weight:800;margin-bottom:8px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+.modal-field{margin-bottom:14px;}
+.modal-field label{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+.modal-field input,.modal-field textarea{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:12px;padding:10px 14px;outline:none;transition:border-color .2s;resize:vertical;}
+.modal-field input:focus,.modal-field textarea:focus{border-color:var(--p1);}
+.modal-field textarea{min-height:80px;}
+.modal-btns{display:flex;gap:10px;margin-top:20px;}
+.modal-send{flex:1;padding:12px;background:var(--p2);color:var(--bg);font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s;}
+.modal-send:hover{opacity:.88;}
+.modal-send:disabled{opacity:.4;cursor:not-allowed;}
+.modal-cancel{padding:12px 18px;background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;}
+.modal-cancel:hover{border-color:var(--muted);color:var(--text);}
+.modal-ok{text-align:center;padding:10px 0;}
+/* SUBMIT FORM */
+.submit-wrap{padding:8px 0 60px;}
+.auth-header{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid rgba(0,255,135,.2);border-radius:12px;padding:14px 20px;margin-bottom:28px;}
+.auth-status{font-family:'Space Mono',monospace;font-size:11px;color:var(--p1);}
+.auth-logout{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;cursor:pointer;transition:all .2s;}
+.auth-logout:hover{border-color:var(--hard);color:var(--hard);}
+.submit-intro{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:28px;}
+.submit-intro-title{font-weight:800;font-size:1rem;margin-bottom:8px;}
+.submit-intro-sub{font-size:13px;color:var(--muted);line-height:1.7;}
+.submit-intro-sub code{font-family:'Space Mono',monospace;background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:11px;color:var(--p1);}
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:20px;}
+.form-section-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--p1);text-transform:uppercase;margin-bottom:18px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:7px;}
+.field input,.field textarea{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:12px;padding:11px 14px;outline:none;transition:border-color .2s;resize:vertical;}
+.field input:focus,.field textarea:focus{border-color:var(--p1);}
+.field textarea{min-height:200px;line-height:1.6;}
+.field textarea.short{min-height:80px;}
+.star-row{display:flex;gap:10px;align-items:center;}
+.star{font-size:1.5rem;cursor:pointer;opacity:.3;transition:opacity .15s,transform .15s;}
+.star.lit{opacity:1;}
+.star:hover{transform:scale(1.2);}
+.star-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-left:6px;}
+.submit-btn{width:100%;padding:16px;background:var(--p1);color:var(--bg);font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:10px;cursor:pointer;transition:opacity .2s,transform .15s;}
+.submit-btn:hover{opacity:.88;transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.result-card{border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-top:24px;display:none;}
+.result-card.show{display:block;}
+.result-card.success{border-color:rgba(0,255,135,.3);background:rgba(0,255,135,.04);}
+.result-card.error{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.04);}
+.result-title{font-weight:800;font-size:1rem;margin-bottom:16px;}
+.result-title.ok{color:var(--p1);}.result-title.err{color:var(--hard);}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+@media(max-width:500px){.result-grid{grid-template-columns:1fr;}}
+.result-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.result-item-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
+.result-item-val{font-size:13px;font-weight:600;}
+.result-approach{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;font-size:13px;line-height:1.7;color:var(--muted);}
+.result-insight-box{background:var(--surface2);border-radius:8px;padding:12px 14px;font-family:'Space Mono',monospace;font-size:11px;color:var(--p2);line-height:1.7;}
+.result-link{font-family:'Space Mono',monospace;font-size:11px;color:var(--p1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:12px;}
+.result-link:hover{text-decoration:underline;}
+.revisit-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;padding:4px 10px;border-radius:99px;margin-top:8px;}
+.revisit-yes{background:rgba(248,113,113,.12);color:var(--hard);border:1px solid rgba(248,113,113,.3);}
+.revisit-no{background:rgba(0,255,135,.08);color:var(--p1);border:1px solid rgba(0,255,135,.25);}
+.history-section{margin-top:32px;}
+.history-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.history-list{display:flex;flex-direction:column;gap:8px;}
+.history-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:12px;}
+.history-name{flex:1;font-weight:600;}
+.history-pattern{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.history-stars{font-size:.85rem;}
+.history-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);}
+.history-empty{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);text-align:center;padding:30px;border:1px dashed var(--border);border-radius:10px;}
 footer{border-top:1px solid var(--border);padding:30px 0 50px;margin-top:20px;text-align:center;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
-
-/* ─── DEPLOY BANNER ─── */
-.deploy{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(56,189,248,.02));border:1px solid rgba(56,189,248,.2);border-radius:12px;padding:18px 22px;margin-bottom:40px;}
-.deploy-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--p2);margin-bottom:10px;}
-.deploy-steps{font-size:12px;color:var(--muted);line-height:1.9;}
-.deploy-steps code{font-family:'Space Mono',monospace;background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:11px;color:var(--text);}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-<!-- ─── HEADER ─── -->
 <header>
-  <div class="tag">// Zero → Master · 12 Weeks · Full Send</div>
+  <div class="tag">// Zero to Master - 12 Weeks - Full Send</div>
   <h1>LeetCode<br><em>Master Plan</em></h1>
-  <div class="header-meta">
-    <span>Jean Johnson</span> &nbsp;·&nbsp; 4–6 hrs/day &nbsp;·&nbsp; ~170 problems &nbsp;·&nbsp; 3 phases
-  </div>
+  <div class="header-meta"><span>Jean Johnson</span> &nbsp;|&nbsp; 4-6 hrs/day &nbsp;|&nbsp; ~170 problems &nbsp;|&nbsp; 3 phases</div>
 </header>
-
-<!-- ─── STATS ─── -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('tracker')">Tracker</div>
+  <div class="tab" onclick="switchTab('submit')">Submit Solution</div>
+</div>
+<!-- TRACKER TAB -->
+<div class="tab-panel active" id="tab-tracker">
 <div class="stats">
   <div class="stat"><div class="stat-n c-easy" id="cnt-easy">0</div><div class="stat-l">Easy Done</div></div>
   <div class="stat"><div class="stat-n c-med" id="cnt-med">0</div><div class="stat-l">Med Done</div></div>
@@ -196,569 +216,349 @@ footer{border-top:1px solid var(--border);padding:30px 0 50px;margin-top:20px;te
   <div class="stat"><div class="stat-n c-p2" id="cnt-total">0</div><div class="stat-l">Total Done</div></div>
   <div class="stat"><div class="stat-n c-gold" id="cnt-streak">0</div><div class="stat-l">Day Streak</div></div>
 </div>
-
-<!-- ─── MASTER PROGRESS ─── -->
 <div class="master">
-  <div class="master-top">
-    <div class="master-title">Overall Progress</div>
-    <div class="master-pct" id="master-pct">0%</div>
-  </div>
+  <div class="master-top"><div class="master-title">Overall Progress</div><div class="master-pct" id="master-pct">0%</div></div>
   <div class="bar"><div class="bar-fill" id="master-bar" style="width:0%"></div></div>
   <div class="phase-bars">
-    <div>
-      <div class="pb-label"><span>Phase 1 — Foundations</span><b id="p1-pct">0%</b></div>
-      <div class="pb"><div class="pb-fill fill-p1" id="p1-bar" style="width:0%"></div></div>
-    </div>
-    <div>
-      <div class="pb-label"><span>Phase 2 — Intermediate</span><b id="p2-pct">0%</b></div>
-      <div class="pb"><div class="pb-fill fill-p2" id="p2-bar" style="width:0%"></div></div>
-    </div>
-    <div>
-      <div class="pb-label"><span>Phase 3 — Advanced</span><b id="p3-pct">0%</b></div>
-      <div class="pb"><div class="pb-fill fill-p3" id="p3-bar" style="width:0%"></div></div>
-    </div>
+    <div><div class="pb-label"><span>Phase 1</span><b id="p1-pct">0%</b></div><div class="pb"><div class="pb-fill fill-p1" id="p1-bar" style="width:0%"></div></div></div>
+    <div><div class="pb-label"><span>Phase 2</span><b id="p2-pct">0%</b></div><div class="pb"><div class="pb-fill fill-p2" id="p2-bar" style="width:0%"></div></div></div>
+    <div><div class="pb-label"><span>Phase 3</span><b id="p3-pct">0%</b></div><div class="pb"><div class="pb-fill fill-p3" id="p3-bar" style="width:0%"></div></div></div>
   </div>
 </div>
-
-<!-- ─── STREAK ─── -->
 <div class="streak">
-  <div class="streak-icon">🔥</div>
+  <div class="streak-icon">&#128293;</div>
   <div class="streak-copy">
     <div class="streak-big" id="streak-label">Start your streak today!</div>
-    <div class="streak-small">Mark today done after completing your daily problems</div>
+    <div class="streak-small">Mark today done after finishing your daily problems</div>
   </div>
-  <button class="streak-btn" onclick="markToday()">✓ Mark Today Done</button>
+  <button class="streak-btn" onclick="markToday()">Mark Today Done</button>
 </div>
-
-<!-- ══════════════════════════════════════
-     PHASE 1
-═══════════════════════════════════════ -->
 <div class="phase open" id="phase-1">
   <div class="phase-hdr" onclick="togglePhase('phase-1')">
-    <div class="phase-hdr-left">
-      <div class="badge badge-p1">PHASE 1</div>
-      <div class="phase-titles">
-        <div class="phase-name">Pattern Boot Camp</div>
-        <div class="phase-sub">Weeks 1–4 · Arrays → Binary Search → Linked Lists → Stacks</div>
-      </div>
-    </div>
-    <div class="phase-hdr-right">
-      <div class="phase-stat" id="p1-stat"><b>0</b>/68 done</div>
-      <div class="chevron"></div>
-    </div>
+    <div class="phase-hdr-left"><div class="badge badge-p1">PHASE 1</div><div class="phase-titles"><div class="phase-name">Pattern Boot Camp</div><div class="phase-sub">Weeks 1-4: Arrays, Two Pointers, Linked Lists, Stacks</div></div></div>
+    <div class="phase-hdr-right"><div class="phase-stat" id="p1-stat"><b>0</b>/56 done</div><div class="chevron"></div></div>
   </div>
   <div class="phase-body">
-    <div class="goal-box goal-p1">Goal: Build muscle memory on the 6 core patterns. Every FAANG problem traces back to these. Do NOT skip Easy problems — understand <em>why</em> the pattern fits.</div>
-    <div class="milestones">
-      <div class="milestone">📌 Solve 60–70 problems</div>
-      <div class="milestone">📌 Internalize Two-Pointer & Sliding Window</div>
-      <div class="milestone">📌 Write pattern notes after each topic</div>
-      <div class="milestone">📌 No looking at solutions before 20 min attempt</div>
-    </div>
+    <div class="goal-box goal-p1">Build muscle memory on the 6 core patterns. Every FAANG problem traces back to these. Do NOT skip Easy problems - understand why the pattern fits.</div>
+    <div class="milestones"><div class="milestone">60-70 problems</div><div class="milestone">Internalize Two-Pointer and Sliding Window</div><div class="milestone">Pattern notes after each topic</div><div class="milestone">20-min attempt before hints</div></div>
 
-    <!-- WEEK 1 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 1</span>
-        <span class="week-name">Arrays, Strings & Hashmaps</span>
-        <span class="week-count" id="w1-count">0/16</span>
-      </div>
-      <div class="schedule">
-        <div class="schedule-title">// Daily Schedule</div>
-        <div class="srow"><span class="stime">8–9:30 AM</span>Learn pattern + 2 Easy problems — no timer</div>
-        <div class="srow"><span class="stime">11–12:30 PM</span>3 Medium problems — 25 min each max</div>
-        <div class="srow"><span class="stime">3–4 PM</span>Re-solve 1 failed problem + add to notes</div>
-        <div class="srow"><span class="stime">8–9 PM</span>Review solutions, read discussion tabs</div>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Two-pointer eliminates the inner loop — always think "can I use two pointers?" before writing O(n²)</div>
-        <div class="tip">Prefix sum turns range-sum queries into O(1)</div>
-        <div class="tip">Char frequency array (size 26) beats hashmap for lowercase string problems</div>
-        <div class="tip">Store value→index (not value→bool) in your hashmap for Two Sum style problems</div>
-      </div>
-      <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
-      <div class="prob-list" id="w1-easy">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Two Sum</div><a class="prob-link" href="https://leetcode.com/problems/two-sum/" target="_blank" onclick="e(event)">LC #1 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Best Time to Buy and Sell Stock</div><a class="prob-link" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" onclick="e(event)">LC #121 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Remove Duplicates from Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" onclick="e(event)">LC #26 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Move Zeroes</div><a class="prob-link" href="https://leetcode.com/problems/move-zeroes/" target="_blank" onclick="e(event)">LC #283 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Anagram</div><a class="prob-link" href="https://leetcode.com/problems/valid-anagram/" target="_blank" onclick="e(event)">LC #242 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Ransom Note</div><a class="prob-link" href="https://leetcode.com/problems/ransom-note/" target="_blank" onclick="e(event)">LC #383 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Isomorphic Strings</div><a class="prob-link" href="https://leetcode.com/problems/isomorphic-strings/" target="_blank" onclick="e(event)">LC #205 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Majority Element</div><a class="prob-link" href="https://leetcode.com/problems/majority-element/" target="_blank" onclick="e(event)">LC #169 ↗</a></div>
-      </div>
-      <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
-      <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Group Anagrams</div><a class="prob-link" href="https://leetcode.com/problems/group-anagrams/" target="_blank" onclick="e(event)">LC #49 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Top K Frequent Elements</div><a class="prob-link" href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" onclick="e(event)">LC #347 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Product of Array Except Self</div><a class="prob-link" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" onclick="e(event)">LC #238 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Subarray Sum Equals K</div><a class="prob-link" href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" onclick="e(event)">LC #560 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Container With Most Water</div><a class="prob-link" href="https://leetcode.com/problems/container-with-most-water/" target="_blank" onclick="e(event)">LC #11 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">3Sum</div><a class="prob-link" href="https://leetcode.com/problems/3sum/" target="_blank" onclick="e(event)">LC #15 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Consecutive Sequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-consecutive-sequence/" target="_blank" onclick="e(event)">LC #128 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Valid Sudoku</div><a class="prob-link" href="https://leetcode.com/problems/valid-sudoku/" target="_blank" onclick="e(event)">LC #36 ↗</a></div>
-      </div>
-    </div>
-
-    <!-- WEEK 2 -->
-    <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 2</span>
-        <span class="week-name">Two Pointers & Sliding Window</span>
-        <span class="week-count" id="w2-count">0/14</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Sliding window: expand right freely, shrink left only when constraint is violated</div>
-        <div class="tip">Fixed-size window — move both pointers together; variable-size — use while loop on left</div>
-        <div class="tip">When you see "longest/shortest subarray/substring", think Sliding Window first</div>
+      <div class="week-hdr"><span class="week-tag">Week 1</span><span class="week-name">Arrays, Strings and Hashmaps</span><span class="week-count" id="w1-count">0/16</span></div>
+      <div class="schedule"><div class="schedule-title">// Daily Schedule</div>
+        <div class="srow"><span class="stime">8-9:30 AM</span>Learn pattern + 2 Easy problems, no timer</div>
+        <div class="srow"><span class="stime">11 AM-12:30</span>3 Medium problems, 25 min each max</div>
+        <div class="srow"><span class="stime">3-4 PM</span>Re-solve 1 failed problem, add to notes</div>
+        <div class="srow"><span class="stime">8-9 PM</span>Review solutions and read discussion tabs</div>
       </div>
       <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Palindrome</div><a class="prob-link" href="https://leetcode.com/problems/valid-palindrome/" target="_blank" onclick="e(event)">LC #125 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Merge Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" onclick="e(event)">LC #88 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Contains Duplicate II</div><a class="prob-link" href="https://leetcode.com/problems/contains-duplicate-ii/" target="_blank" onclick="e(event)">LC #219 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Two Sum</div><a class="prob-link" href="https://leetcode.com/problems/two-sum/" target="_blank" onclick="sp(event)">LC #1</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Best Time to Buy and Sell Stock</div><a class="prob-link" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" onclick="sp(event)">LC #121</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Remove Duplicates from Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" onclick="sp(event)">LC #26</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Move Zeroes</div><a class="prob-link" href="https://leetcode.com/problems/move-zeroes/" target="_blank" onclick="sp(event)">LC #283</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Anagram</div><a class="prob-link" href="https://leetcode.com/problems/valid-anagram/" target="_blank" onclick="sp(event)">LC #242</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Ransom Note</div><a class="prob-link" href="https://leetcode.com/problems/ransom-note/" target="_blank" onclick="sp(event)">LC #383</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Isomorphic Strings</div><a class="prob-link" href="https://leetcode.com/problems/isomorphic-strings/" target="_blank" onclick="sp(event)">LC #205</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Majority Element</div><a class="prob-link" href="https://leetcode.com/problems/majority-element/" target="_blank" onclick="sp(event)">LC #169</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Substring Without Repeating Characters</div><a class="prob-link" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" onclick="e(event)">LC #3 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Repeating Character Replacement</div><a class="prob-link" href="https://leetcode.com/problems/longest-repeating-character-replacement/" target="_blank" onclick="e(event)">LC #424 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Max Consecutive Ones III</div><a class="prob-link" href="https://leetcode.com/problems/max-consecutive-ones-iii/" target="_blank" onclick="e(event)">LC #1004 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Permutation in String</div><a class="prob-link" href="https://leetcode.com/problems/permutation-in-string/" target="_blank" onclick="e(event)">LC #567 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Minimum Size Subarray Sum</div><a class="prob-link" href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" onclick="e(event)">LC #209 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Search in Rotated Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" onclick="e(event)">LC #33 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Find Minimum in Rotated Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" onclick="e(event)">LC #153 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Koko Eating Bananas</div><a class="prob-link" href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank" onclick="e(event)">LC #875 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Group Anagrams</div><a class="prob-link" href="https://leetcode.com/problems/group-anagrams/" target="_blank" onclick="sp(event)">LC #49</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Top K Frequent Elements</div><a class="prob-link" href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" onclick="sp(event)">LC #347</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Product of Array Except Self</div><a class="prob-link" href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" onclick="sp(event)">LC #238</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Subarray Sum Equals K</div><a class="prob-link" href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" onclick="sp(event)">LC #560</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Container With Most Water</div><a class="prob-link" href="https://leetcode.com/problems/container-with-most-water/" target="_blank" onclick="sp(event)">LC #11</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">3Sum</div><a class="prob-link" href="https://leetcode.com/problems/3sum/" target="_blank" onclick="sp(event)">LC #15</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Consecutive Sequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-consecutive-sequence/" target="_blank" onclick="sp(event)">LC #128</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Valid Sudoku</div><a class="prob-link" href="https://leetcode.com/problems/valid-sudoku/" target="_blank" onclick="sp(event)">LC #36</a></div>
       </div>
     </div>
 
-    <!-- WEEK 3 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 3</span>
-        <span class="week-name">Linked Lists & Binary Search</span>
-        <span class="week-count" id="w3-count">0/18</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Linked List: always draw it out. Pointer reassignment bugs come from visualizing wrong</div>
-        <div class="tip">Fast/slow pointer (Floyd's) detects cycles and finds midpoints in O(n) O(1) space</div>
-        <div class="tip">Binary search: always ask "is my answer space monotonic?" — if yes, binary search it</div>
-        <div class="tip">Remember lo=mid+1, hi=mid pattern for lower bound vs lo=mid, hi=mid-1 for upper</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 2</span><span class="week-name">Two Pointers and Sliding Window</span><span class="week-count" id="w2-count">0/11</span></div>
       <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Reverse Linked List</div><a class="prob-link" href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" onclick="e(event)">LC #206 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Merge Two Sorted Lists</div><a class="prob-link" href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" onclick="e(event)">LC #21 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Linked List Cycle</div><a class="prob-link" href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" onclick="e(event)">LC #141 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Middle of the Linked List</div><a class="prob-link" href="https://leetcode.com/problems/middle-of-the-linked-list/" target="_blank" onclick="e(event)">LC #876 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Binary Search</div><a class="prob-link" href="https://leetcode.com/problems/binary-search/" target="_blank" onclick="e(event)">LC #704 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">First Bad Version</div><a class="prob-link" href="https://leetcode.com/problems/first-bad-version/" target="_blank" onclick="e(event)">LC #278 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Palindrome</div><a class="prob-link" href="https://leetcode.com/problems/valid-palindrome/" target="_blank" onclick="sp(event)">LC #125</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Merge Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" onclick="sp(event)">LC #88</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Contains Duplicate II</div><a class="prob-link" href="https://leetcode.com/problems/contains-duplicate-ii/" target="_blank" onclick="sp(event)">LC #219</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Remove Nth Node From End of List</div><a class="prob-link" href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" onclick="e(event)">LC #19 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Reorder List</div><a class="prob-link" href="https://leetcode.com/problems/reorder-list/" target="_blank" onclick="e(event)">LC #143 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">LRU Cache</div><a class="prob-link" href="https://leetcode.com/problems/lru-cache/" target="_blank" onclick="e(event)">LC #146 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Add Two Numbers</div><a class="prob-link" href="https://leetcode.com/problems/add-two-numbers/" target="_blank" onclick="e(event)">LC #2 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Find Peak Element</div><a class="prob-link" href="https://leetcode.com/problems/find-peak-element/" target="_blank" onclick="e(event)">LC #162 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Time Based Key-Value Store</div><a class="prob-link" href="https://leetcode.com/problems/time-based-key-value-store/" target="_blank" onclick="e(event)">LC #981 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Substring Without Repeating Characters</div><a class="prob-link" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" onclick="sp(event)">LC #3</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Repeating Character Replacement</div><a class="prob-link" href="https://leetcode.com/problems/longest-repeating-character-replacement/" target="_blank" onclick="sp(event)">LC #424</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Permutation in String</div><a class="prob-link" href="https://leetcode.com/problems/permutation-in-string/" target="_blank" onclick="sp(event)">LC #567</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Minimum Size Subarray Sum</div><a class="prob-link" href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" onclick="sp(event)">LC #209</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Search in Rotated Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" onclick="sp(event)">LC #33</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Find Minimum in Rotated Sorted Array</div><a class="prob-link" href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" onclick="sp(event)">LC #153</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Koko Eating Bananas</div><a class="prob-link" href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank" onclick="sp(event)">LC #875</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Max Consecutive Ones III</div><a class="prob-link" href="https://leetcode.com/problems/max-consecutive-ones-iii/" target="_blank" onclick="sp(event)">LC #1004</a></div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-hdr"><span class="week-tag">Week 3</span><span class="week-name">Linked Lists and Binary Search</span><span class="week-count" id="w3-count">0/15</span></div>
+      <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
+      <div class="prob-list">
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Reverse Linked List</div><a class="prob-link" href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" onclick="sp(event)">LC #206</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Merge Two Sorted Lists</div><a class="prob-link" href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" onclick="sp(event)">LC #21</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Linked List Cycle</div><a class="prob-link" href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" onclick="sp(event)">LC #141</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Middle of the Linked List</div><a class="prob-link" href="https://leetcode.com/problems/middle-of-the-linked-list/" target="_blank" onclick="sp(event)">LC #876</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Binary Search</div><a class="prob-link" href="https://leetcode.com/problems/binary-search/" target="_blank" onclick="sp(event)">LC #704</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">First Bad Version</div><a class="prob-link" href="https://leetcode.com/problems/first-bad-version/" target="_blank" onclick="sp(event)">LC #278</a></div>
+      </div>
+      <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
+      <div class="prob-list">
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Remove Nth Node From End of List</div><a class="prob-link" href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" onclick="sp(event)">LC #19</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Reorder List</div><a class="prob-link" href="https://leetcode.com/problems/reorder-list/" target="_blank" onclick="sp(event)">LC #143</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">LRU Cache</div><a class="prob-link" href="https://leetcode.com/problems/lru-cache/" target="_blank" onclick="sp(event)">LC #146</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Add Two Numbers</div><a class="prob-link" href="https://leetcode.com/problems/add-two-numbers/" target="_blank" onclick="sp(event)">LC #2</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Time Based Key-Value Store</div><a class="prob-link" href="https://leetcode.com/problems/time-based-key-value-store/" target="_blank" onclick="sp(event)">LC #981</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Merge K Sorted Lists</div><a class="prob-link" href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank" onclick="e(event)">LC #23 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Reverse Nodes in k-Group</div><a class="prob-link" href="https://leetcode.com/problems/reverse-nodes-in-k-group/" target="_blank" onclick="e(event)">LC #25 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Median of Two Sorted Arrays</div><a class="prob-link" href="https://leetcode.com/problems/median-of-two-sorted-arrays/" target="_blank" onclick="e(event)">LC #4 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Minimum Window Substring</div><a class="prob-link" href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" onclick="e(event)">LC #76 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Merge K Sorted Lists</div><a class="prob-link" href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank" onclick="sp(event)">LC #23</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Median of Two Sorted Arrays</div><a class="prob-link" href="https://leetcode.com/problems/median-of-two-sorted-arrays/" target="_blank" onclick="sp(event)">LC #4</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Minimum Window Substring</div><a class="prob-link" href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" onclick="sp(event)">LC #76</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Reverse Nodes in k-Group</div><a class="prob-link" href="https://leetcode.com/problems/reverse-nodes-in-k-group/" target="_blank" onclick="sp(event)">LC #25</a></div>
       </div>
     </div>
 
-    <!-- WEEK 4 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 4</span>
-        <span class="week-name">Stacks, Queues & Intervals</span>
-        <span class="week-count" id="w4-count">0/18</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Monotonic stack: when you need the "next greater / smaller" element in O(n)</div>
-        <div class="tip">Intervals: sort by start time first, then greedily merge or count overlaps</div>
-        <div class="tip">Use a min-heap as a priority queue to always get the earliest-ending interval</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 4</span><span class="week-name">Stacks, Queues and Intervals</span><span class="week-count" id="w4-count">0/14</span></div>
       <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Parentheses</div><a class="prob-link" href="https://leetcode.com/problems/valid-parentheses/" target="_blank" onclick="e(event)">LC #20 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Min Stack</div><a class="prob-link" href="https://leetcode.com/problems/min-stack/" target="_blank" onclick="e(event)">LC #155 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Implement Queue using Stacks</div><a class="prob-link" href="https://leetcode.com/problems/implement-queue-using-stacks/" target="_blank" onclick="e(event)">LC #232 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Baseball Game</div><a class="prob-link" href="https://leetcode.com/problems/baseball-game/" target="_blank" onclick="e(event)">LC #682 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Valid Parentheses</div><a class="prob-link" href="https://leetcode.com/problems/valid-parentheses/" target="_blank" onclick="sp(event)">LC #20</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Min Stack</div><a class="prob-link" href="https://leetcode.com/problems/min-stack/" target="_blank" onclick="sp(event)">LC #155</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="easy"><div class="chk"></div><div class="prob-name">Implement Queue using Stacks</div><a class="prob-link" href="https://leetcode.com/problems/implement-queue-using-stacks/" target="_blank" onclick="sp(event)">LC #232</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Daily Temperatures</div><a class="prob-link" href="https://leetcode.com/problems/daily-temperatures/" target="_blank" onclick="e(event)">LC #739 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Car Fleet</div><a class="prob-link" href="https://leetcode.com/problems/car-fleet/" target="_blank" onclick="e(event)">LC #853 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Evaluate Reverse Polish Notation</div><a class="prob-link" href="https://leetcode.com/problems/evaluate-reverse-polish-notation/" target="_blank" onclick="e(event)">LC #150 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Merge Intervals</div><a class="prob-link" href="https://leetcode.com/problems/merge-intervals/" target="_blank" onclick="e(event)">LC #56 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Insert Interval</div><a class="prob-link" href="https://leetcode.com/problems/insert-interval/" target="_blank" onclick="e(event)">LC #57 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Non-overlapping Intervals</div><a class="prob-link" href="https://leetcode.com/problems/non-overlapping-intervals/" target="_blank" onclick="e(event)">LC #435 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Meeting Rooms II</div><a class="prob-link" href="https://leetcode.com/problems/meeting-rooms-ii/" target="_blank" onclick="e(event)">LC #253 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Asteroid Collision</div><a class="prob-link" href="https://leetcode.com/problems/asteroid-collision/" target="_blank" onclick="e(event)">LC #735 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Daily Temperatures</div><a class="prob-link" href="https://leetcode.com/problems/daily-temperatures/" target="_blank" onclick="sp(event)">LC #739</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Evaluate Reverse Polish Notation</div><a class="prob-link" href="https://leetcode.com/problems/evaluate-reverse-polish-notation/" target="_blank" onclick="sp(event)">LC #150</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Merge Intervals</div><a class="prob-link" href="https://leetcode.com/problems/merge-intervals/" target="_blank" onclick="sp(event)">LC #56</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Insert Interval</div><a class="prob-link" href="https://leetcode.com/problems/insert-interval/" target="_blank" onclick="sp(event)">LC #57</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Non-overlapping Intervals</div><a class="prob-link" href="https://leetcode.com/problems/non-overlapping-intervals/" target="_blank" onclick="sp(event)">LC #435</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Meeting Rooms II</div><a class="prob-link" href="https://leetcode.com/problems/meeting-rooms-ii/" target="_blank" onclick="sp(event)">LC #253</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="med"><div class="chk"></div><div class="prob-name">Asteroid Collision</div><a class="prob-link" href="https://leetcode.com/problems/asteroid-collision/" target="_blank" onclick="sp(event)">LC #735</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Largest Rectangle in Histogram</div><a class="prob-link" href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" onclick="e(event)">LC #84 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Trapping Rain Water</div><a class="prob-link" href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" onclick="e(event)">LC #42 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Largest Rectangle in Histogram</div><a class="prob-link" href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" onclick="sp(event)">LC #84</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="1" data-diff="hard"><div class="chk"></div><div class="prob-name">Trapping Rain Water</div><a class="prob-link" href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" onclick="sp(event)">LC #42</a></div>
       </div>
     </div>
-  </div><!-- /phase-body -->
-</div><!-- /phase-1 -->
-
-<!-- ══════════════════════════════════════
-     PHASE 2
-═══════════════════════════════════════ -->
+  </div>
+</div>
 <div class="phase" id="phase-2">
   <div class="phase-hdr" onclick="togglePhase('phase-2')">
-    <div class="phase-hdr-left">
-      <div class="badge badge-p2">PHASE 2</div>
-      <div class="phase-titles">
-        <div class="phase-name">Intermediate Patterns</div>
-        <div class="phase-sub">Weeks 5–8 · Trees → Graphs → Backtracking → Heaps → Tries</div>
-      </div>
-    </div>
-    <div class="phase-hdr-right">
-      <div class="phase-stat" id="p2-stat"><b>0</b>/60 done</div>
-      <div class="chevron"></div>
-    </div>
+    <div class="phase-hdr-left"><div class="badge badge-p2">PHASE 2</div><div class="phase-titles"><div class="phase-name">Intermediate Patterns</div><div class="phase-sub">Weeks 5-8: Trees, Graphs, Backtracking, Heaps, Tries</div></div></div>
+    <div class="phase-hdr-right"><div class="phase-stat" id="p2-stat"><b>0</b>/52 done</div><div class="chevron"></div></div>
   </div>
   <div class="phase-body">
-    <div class="goal-box goal-p2">Goal: Trees and Graphs are the most common interview topics at top companies. Add 1 timed 45-min mock problem per day this phase — no hints allowed. Simulate real pressure.</div>
-    <div class="milestones">
-      <div class="milestone">📌 Solve 55–65 problems</div>
-      <div class="milestone">📌 Implement BFS, DFS, Dijkstra from scratch</div>
-      <div class="milestone">📌 1 mock timed problem daily</div>
-      <div class="milestone">📌 Do at least 2 mock interviews by Week 8</div>
-    </div>
+    <div class="goal-box goal-p2">Trees and Graphs are the most common interview topics at top companies. Add 1 timed 45-min mock problem per day this phase.</div>
+    <div class="milestones"><div class="milestone">55-65 problems</div><div class="milestone">BFS and DFS cold</div><div class="milestone">1 mock daily</div><div class="milestone">2 mock interviews by Week 8</div></div>
 
-    <!-- WEEK 5 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 5</span>
-        <span class="week-name">Binary Trees & BST</span>
-        <span class="week-count" id="w5-count">0/16</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Master recursive tree traversal (pre/in/post) — it powers 80% of tree problems</div>
-        <div class="tip">When you need level-by-level info, reach for BFS (queue)</div>
-        <div class="tip">BST property: left subtree < node < right subtree — use inorder traversal to get sorted order</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 5</span><span class="week-name">Binary Trees and BST</span><span class="week-count" id="w5-count">0/15</span></div>
       <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Invert Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" onclick="e(event)">LC #226 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Maximum Depth of Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" onclick="e(event)">LC #104 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Symmetric Tree</div><a class="prob-link" href="https://leetcode.com/problems/symmetric-tree/" target="_blank" onclick="e(event)">LC #101 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Diameter of Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/diameter-of-binary-tree/" target="_blank" onclick="e(event)">LC #543 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Balanced Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" onclick="e(event)">LC #110 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Invert Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" onclick="sp(event)">LC #226</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Maximum Depth of Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" onclick="sp(event)">LC #104</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Symmetric Tree</div><a class="prob-link" href="https://leetcode.com/problems/symmetric-tree/" target="_blank" onclick="sp(event)">LC #101</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Diameter of Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/diameter-of-binary-tree/" target="_blank" onclick="sp(event)">LC #543</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="easy"><div class="chk"></div><div class="prob-name">Balanced Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" onclick="sp(event)">LC #110</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Binary Tree Level Order Traversal</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" onclick="e(event)">LC #102 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Binary Tree Right Side View</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank" onclick="e(event)">LC #199 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Count Good Nodes in Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/count-good-nodes-in-binary-tree/" target="_blank" onclick="e(event)">LC #1448 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Lowest Common Ancestor of BST</div><a class="prob-link" href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank" onclick="e(event)">LC #235 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Validate Binary Search Tree</div><a class="prob-link" href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" onclick="e(event)">LC #98 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Kth Smallest Element in BST</div><a class="prob-link" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/" target="_blank" onclick="e(event)">LC #230 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Construct Binary Tree from Preorder and Inorder</div><a class="prob-link" href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" onclick="e(event)">LC #105 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Path Sum II</div><a class="prob-link" href="https://leetcode.com/problems/path-sum-ii/" target="_blank" onclick="e(event)">LC #113 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Binary Tree Level Order Traversal</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" onclick="sp(event)">LC #102</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Binary Tree Right Side View</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank" onclick="sp(event)">LC #199</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Validate Binary Search Tree</div><a class="prob-link" href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" onclick="sp(event)">LC #98</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Kth Smallest Element in BST</div><a class="prob-link" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/" target="_blank" onclick="sp(event)">LC #230</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Lowest Common Ancestor of BST</div><a class="prob-link" href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank" onclick="sp(event)">LC #235</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Construct Binary Tree from Preorder and Inorder</div><a class="prob-link" href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" onclick="sp(event)">LC #105</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Count Good Nodes in Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/count-good-nodes-in-binary-tree/" target="_blank" onclick="sp(event)">LC #1448</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Path Sum II</div><a class="prob-link" href="https://leetcode.com/problems/path-sum-ii/" target="_blank" onclick="sp(event)">LC #113</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Binary Tree Maximum Path Sum</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" onclick="e(event)">LC #124 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Serialize and Deserialize Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" onclick="e(event)">LC #297 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Binary Tree Maximum Path Sum</div><a class="prob-link" href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" onclick="sp(event)">LC #124</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Serialize and Deserialize Binary Tree</div><a class="prob-link" href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" onclick="sp(event)">LC #297</a></div>
       </div>
     </div>
 
-    <!-- WEEK 6 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 6</span>
-        <span class="week-name">Graphs — BFS / DFS / Union Find</span>
-        <span class="week-count" id="w6-count">0/14</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Always use a visited set or in-place marking to avoid infinite loops</div>
-        <div class="tip">BFS for shortest path in unweighted graphs; DFS for connected components & topological sort</div>
-        <div class="tip">Union-Find handles dynamic connectivity — learn path compression + union by rank cold</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 6</span><span class="week-name">Graphs - BFS, DFS, Union Find</span><span class="week-count" id="w6-count">0/13</span></div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Number of Islands</div><a class="prob-link" href="https://leetcode.com/problems/number-of-islands/" target="_blank" onclick="e(event)">LC #200 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Clone Graph</div><a class="prob-link" href="https://leetcode.com/problems/clone-graph/" target="_blank" onclick="e(event)">LC #133 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Max Area of Island</div><a class="prob-link" href="https://leetcode.com/problems/max-area-of-island/" target="_blank" onclick="e(event)">LC #695 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Rotting Oranges</div><a class="prob-link" href="https://leetcode.com/problems/rotting-oranges/" target="_blank" onclick="e(event)">LC #994 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Pacific Atlantic Water Flow</div><a class="prob-link" href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank" onclick="e(event)">LC #417 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Course Schedule</div><a class="prob-link" href="https://leetcode.com/problems/course-schedule/" target="_blank" onclick="e(event)">LC #207 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Course Schedule II</div><a class="prob-link" href="https://leetcode.com/problems/course-schedule-ii/" target="_blank" onclick="e(event)">LC #210 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Redundant Connection</div><a class="prob-link" href="https://leetcode.com/problems/redundant-connection/" target="_blank" onclick="e(event)">LC #684 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Graph Valid Tree</div><a class="prob-link" href="https://leetcode.com/problems/graph-valid-tree/" target="_blank" onclick="e(event)">LC #261 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Number of Connected Components</div><a class="prob-link" href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/" target="_blank" onclick="e(event)">LC #323 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Number of Islands</div><a class="prob-link" href="https://leetcode.com/problems/number-of-islands/" target="_blank" onclick="sp(event)">LC #200</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Clone Graph</div><a class="prob-link" href="https://leetcode.com/problems/clone-graph/" target="_blank" onclick="sp(event)">LC #133</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Max Area of Island</div><a class="prob-link" href="https://leetcode.com/problems/max-area-of-island/" target="_blank" onclick="sp(event)">LC #695</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Rotting Oranges</div><a class="prob-link" href="https://leetcode.com/problems/rotting-oranges/" target="_blank" onclick="sp(event)">LC #994</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Pacific Atlantic Water Flow</div><a class="prob-link" href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank" onclick="sp(event)">LC #417</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Course Schedule</div><a class="prob-link" href="https://leetcode.com/problems/course-schedule/" target="_blank" onclick="sp(event)">LC #207</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Course Schedule II</div><a class="prob-link" href="https://leetcode.com/problems/course-schedule-ii/" target="_blank" onclick="sp(event)">LC #210</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Redundant Connection</div><a class="prob-link" href="https://leetcode.com/problems/redundant-connection/" target="_blank" onclick="sp(event)">LC #684</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Graph Valid Tree</div><a class="prob-link" href="https://leetcode.com/problems/graph-valid-tree/" target="_blank" onclick="sp(event)">LC #261</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Word Ladder</div><a class="prob-link" href="https://leetcode.com/problems/word-ladder/" target="_blank" onclick="e(event)">LC #127 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Surrounded Regions</div><a class="prob-link" href="https://leetcode.com/problems/surrounded-regions/" target="_blank" onclick="e(event)">LC #130 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Alien Dictionary</div><a class="prob-link" href="https://leetcode.com/problems/alien-dictionary/" target="_blank" onclick="e(event)">LC #269 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Swim in Rising Water</div><a class="prob-link" href="https://leetcode.com/problems/swim-in-rising-water/" target="_blank" onclick="e(event)">LC #778 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Word Ladder</div><a class="prob-link" href="https://leetcode.com/problems/word-ladder/" target="_blank" onclick="sp(event)">LC #127</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Alien Dictionary</div><a class="prob-link" href="https://leetcode.com/problems/alien-dictionary/" target="_blank" onclick="sp(event)">LC #269</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Swim in Rising Water</div><a class="prob-link" href="https://leetcode.com/problems/swim-in-rising-water/" target="_blank" onclick="sp(event)">LC #778</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Surrounded Regions</div><a class="prob-link" href="https://leetcode.com/problems/surrounded-regions/" target="_blank" onclick="sp(event)">LC #130</a></div>
       </div>
     </div>
 
-    <!-- WEEK 7 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 7</span>
-        <span class="week-name">Backtracking & Heaps</span>
-        <span class="week-count" id="w7-count">0/16</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Backtracking template: choose → explore → unchoose. State must be fully restored on backtrack</div>
-        <div class="tip">Prune early: add constraint checks before the recursive call, not after</div>
-        <div class="tip">Heap gives you O(log n) insert and O(1) peek min/max — use for "top K" and scheduling problems</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 7</span><span class="week-name">Backtracking and Heaps</span><span class="week-count" id="w7-count">0/14</span></div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Subsets</div><a class="prob-link" href="https://leetcode.com/problems/subsets/" target="_blank" onclick="e(event)">LC #78 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Combination Sum</div><a class="prob-link" href="https://leetcode.com/problems/combination-sum/" target="_blank" onclick="e(event)">LC #39 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Permutations</div><a class="prob-link" href="https://leetcode.com/problems/permutations/" target="_blank" onclick="e(event)">LC #46 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Letter Combinations of a Phone Number</div><a class="prob-link" href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" onclick="e(event)">LC #17 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Word Search</div><a class="prob-link" href="https://leetcode.com/problems/word-search/" target="_blank" onclick="e(event)">LC #79 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Palindrome Partitioning</div><a class="prob-link" href="https://leetcode.com/problems/palindrome-partitioning/" target="_blank" onclick="e(event)">LC #131 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Kth Largest Element in an Array</div><a class="prob-link" href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" onclick="e(event)">LC #215 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Task Scheduler</div><a class="prob-link" href="https://leetcode.com/problems/task-scheduler/" target="_blank" onclick="e(event)">LC #621 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">K Closest Points to Origin</div><a class="prob-link" href="https://leetcode.com/problems/k-closest-points-to-origin/" target="_blank" onclick="e(event)">LC #973 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Design Twitter</div><a class="prob-link" href="https://leetcode.com/problems/design-twitter/" target="_blank" onclick="e(event)">LC #355 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Subsets</div><a class="prob-link" href="https://leetcode.com/problems/subsets/" target="_blank" onclick="sp(event)">LC #78</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Combination Sum</div><a class="prob-link" href="https://leetcode.com/problems/combination-sum/" target="_blank" onclick="sp(event)">LC #39</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Permutations</div><a class="prob-link" href="https://leetcode.com/problems/permutations/" target="_blank" onclick="sp(event)">LC #46</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Letter Combinations of a Phone Number</div><a class="prob-link" href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" onclick="sp(event)">LC #17</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Word Search</div><a class="prob-link" href="https://leetcode.com/problems/word-search/" target="_blank" onclick="sp(event)">LC #79</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Palindrome Partitioning</div><a class="prob-link" href="https://leetcode.com/problems/palindrome-partitioning/" target="_blank" onclick="sp(event)">LC #131</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Kth Largest Element in an Array</div><a class="prob-link" href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" onclick="sp(event)">LC #215</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Task Scheduler</div><a class="prob-link" href="https://leetcode.com/problems/task-scheduler/" target="_blank" onclick="sp(event)">LC #621</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">K Closest Points to Origin</div><a class="prob-link" href="https://leetcode.com/problems/k-closest-points-to-origin/" target="_blank" onclick="sp(event)">LC #973</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">N-Queens</div><a class="prob-link" href="https://leetcode.com/problems/n-queens/" target="_blank" onclick="e(event)">LC #51 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Sudoku Solver</div><a class="prob-link" href="https://leetcode.com/problems/sudoku-solver/" target="_blank" onclick="e(event)">LC #37 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Find Median from Data Stream</div><a class="prob-link" href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank" onclick="e(event)">LC #295 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">IPO</div><a class="prob-link" href="https://leetcode.com/problems/ipo/" target="_blank" onclick="e(event)">LC #502 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Sliding Window Maximum</div><a class="prob-link" href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank" onclick="e(event)">LC #239 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Word Search II</div><a class="prob-link" href="https://leetcode.com/problems/word-search-ii/" target="_blank" onclick="e(event)">LC #212 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">N-Queens</div><a class="prob-link" href="https://leetcode.com/problems/n-queens/" target="_blank" onclick="sp(event)">LC #51</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Find Median from Data Stream</div><a class="prob-link" href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank" onclick="sp(event)">LC #295</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Sliding Window Maximum</div><a class="prob-link" href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank" onclick="sp(event)">LC #239</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Word Search II</div><a class="prob-link" href="https://leetcode.com/problems/word-search-ii/" target="_blank" onclick="sp(event)">LC #212</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">IPO</div><a class="prob-link" href="https://leetcode.com/problems/ipo/" target="_blank" onclick="sp(event)">LC #502</a></div>
       </div>
     </div>
 
-    <!-- WEEK 8 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 8</span>
-        <span class="week-name">Tries & Advanced Trees</span>
-        <span class="week-count" id="w8-count">0/14</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Trie is the go-to for prefix matching, autocomplete, and word existence in O(L)</div>
-        <div class="tip">Segment tree answers range queries in O(log n); use when you need dynamic range updates</div>
-        <div class="tip">Implement Trie from scratch at least 3 times until it's muscle memory</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 8</span><span class="week-name">Tries and Advanced Trees</span><span class="week-count" id="w8-count">0/10</span></div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Implement Trie (Prefix Tree)</div><a class="prob-link" href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank" onclick="e(event)">LC #208 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Add and Search Word</div><a class="prob-link" href="https://leetcode.com/problems/design-add-and-search-words-data-structure/" target="_blank" onclick="e(event)">LC #211 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Common Prefix</div><a class="prob-link" href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" onclick="e(event)">LC #14 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Replace Words</div><a class="prob-link" href="https://leetcode.com/problems/replace-words/" target="_blank" onclick="e(event)">LC #648 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Map Sum Pairs</div><a class="prob-link" href="https://leetcode.com/problems/map-sum-pairs/" target="_blank" onclick="e(event)">LC #677 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Maximum XOR of Two Numbers in Array</div><a class="prob-link" href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/" target="_blank" onclick="e(event)">LC #421 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Range Sum Query — Mutable</div><a class="prob-link" href="https://leetcode.com/problems/range-sum-query-mutable/" target="_blank" onclick="e(event)">LC #307 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">My Calendar I</div><a class="prob-link" href="https://leetcode.com/problems/my-calendar-i/" target="_blank" onclick="e(event)">LC #729 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Implement Trie (Prefix Tree)</div><a class="prob-link" href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank" onclick="sp(event)">LC #208</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Add and Search Word</div><a class="prob-link" href="https://leetcode.com/problems/design-add-and-search-words-data-structure/" target="_blank" onclick="sp(event)">LC #211</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Replace Words</div><a class="prob-link" href="https://leetcode.com/problems/replace-words/" target="_blank" onclick="sp(event)">LC #648</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Maximum XOR of Two Numbers in Array</div><a class="prob-link" href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/" target="_blank" onclick="sp(event)">LC #421</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Range Sum Query - Mutable</div><a class="prob-link" href="https://leetcode.com/problems/range-sum-query-mutable/" target="_blank" onclick="sp(event)">LC #307</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="med"><div class="chk"></div><div class="prob-name">Map Sum Pairs</div><a class="prob-link" href="https://leetcode.com/problems/map-sum-pairs/" target="_blank" onclick="sp(event)">LC #677</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Word Search II</div><a class="prob-link" href="https://leetcode.com/problems/word-search-ii/" target="_blank" onclick="e(event)">LC #212 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Count of Range Sum</div><a class="prob-link" href="https://leetcode.com/problems/count-of-range-sum/" target="_blank" onclick="e(event)">LC #327 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Prefix and Suffix Search</div><a class="prob-link" href="https://leetcode.com/problems/prefix-and-suffix-search/" target="_blank" onclick="e(event)">LC #745 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Concatenated Words</div><a class="prob-link" href="https://leetcode.com/problems/concatenated-words/" target="_blank" onclick="e(event)">LC #472 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Stream of Characters</div><a class="prob-link" href="https://leetcode.com/problems/stream-of-characters/" target="_blank" onclick="e(event)">LC #1032 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Short Encoding of Words</div><a class="prob-link" href="https://leetcode.com/problems/short-encoding-of-words/" target="_blank" onclick="e(event)">LC #820 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Concatenated Words</div><a class="prob-link" href="https://leetcode.com/problems/concatenated-words/" target="_blank" onclick="sp(event)">LC #472</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Prefix and Suffix Search</div><a class="prob-link" href="https://leetcode.com/problems/prefix-and-suffix-search/" target="_blank" onclick="sp(event)">LC #745</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Stream of Characters</div><a class="prob-link" href="https://leetcode.com/problems/stream-of-characters/" target="_blank" onclick="sp(event)">LC #1032</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="2" data-diff="hard"><div class="chk"></div><div class="prob-name">Short Encoding of Words</div><a class="prob-link" href="https://leetcode.com/problems/short-encoding-of-words/" target="_blank" onclick="sp(event)">LC #820</a></div>
       </div>
     </div>
   </div>
-</div><!-- /phase-2 -->
-
-<!-- ══════════════════════════════════════
-     PHASE 3
-═══════════════════════════════════════ -->
+</div>
 <div class="phase" id="phase-3">
   <div class="phase-hdr" onclick="togglePhase('phase-3')">
-    <div class="phase-hdr-left">
-      <div class="badge badge-p3">PHASE 3</div>
-      <div class="phase-titles">
-        <div class="phase-name">Advanced + Interview Simulation</div>
-        <div class="phase-sub">Weeks 9–12 · DP → Greedy → Advanced Graphs → Mocks</div>
-      </div>
-    </div>
-    <div class="phase-hdr-right">
-      <div class="phase-stat" id="p3-stat"><b>0</b>/46 done</div>
-      <div class="chevron"></div>
-    </div>
+    <div class="phase-hdr-left"><div class="badge badge-p3">PHASE 3</div><div class="phase-titles"><div class="phase-name">Advanced and Interview Simulation</div><div class="phase-sub">Weeks 9-12: DP, Greedy, Advanced Graphs, Mocks</div></div></div>
+    <div class="phase-hdr-right"><div class="phase-stat" id="p3-stat"><b>0</b>/44 done</div><div class="chevron"></div></div>
   </div>
   <div class="phase-body">
-    <div class="goal-box goal-p3">Goal: DP separates good engineers from great ones. Treat every problem as a mock. Time yourself. 2 full mock interviews per week from Week 10 onward — use Pramp, Interviewing.io, or a friend.</div>
-    <div class="milestones">
-      <div class="milestone">📌 Solve 40–50 problems</div>
-      <div class="milestone">📌 Identify DP pattern before coding (top-down vs bottom-up)</div>
-      <div class="milestone">📌 2 mock interviews/week Weeks 10–12</div>
-      <div class="milestone">📌 Target: 80%+ solve rate on Mediums without hints</div>
-    </div>
+    <div class="goal-box goal-p3">DP separates good engineers from great ones. 2 mock interviews per week from Week 10 onward. Use Pramp or Interviewing.io.</div>
+    <div class="milestones"><div class="milestone">40-50 problems</div><div class="milestone">Identify DP pattern before coding</div><div class="milestone">2 mocks/week Weeks 10-12</div><div class="milestone">80%+ on Mediums cold</div></div>
 
-    <!-- WEEK 9 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 9</span>
-        <span class="week-name">Dynamic Programming — 1D & 2D</span>
-        <span class="week-count" id="w9-count">0/14</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Always define dp[i] precisely: "dp[i] = the maximum profit using the first i items"</div>
-        <div class="tip">Start with memoized recursion (top-down), then optimize to tabulation (bottom-up)</div>
-        <div class="tip">2D DP: draw the table and fill by hand for the first 5–6 problems</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 9</span><span class="week-name">Dynamic Programming - 1D and 2D</span><span class="week-count" id="w9-count">0/14</span></div>
       <div class="diff-hdr"><span class="dot dot-easy"></span><span style="color:var(--easy)">EASY</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">Climbing Stairs</div><a class="prob-link" href="https://leetcode.com/problems/climbing-stairs/" target="_blank" onclick="e(event)">LC #70 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">House Robber</div><a class="prob-link" href="https://leetcode.com/problems/house-robber/" target="_blank" onclick="e(event)">LC #198 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">Min Cost Climbing Stairs</div><a class="prob-link" href="https://leetcode.com/problems/min-cost-climbing-stairs/" target="_blank" onclick="e(event)">LC #746 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">Climbing Stairs</div><a class="prob-link" href="https://leetcode.com/problems/climbing-stairs/" target="_blank" onclick="sp(event)">LC #70</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">House Robber</div><a class="prob-link" href="https://leetcode.com/problems/house-robber/" target="_blank" onclick="sp(event)">LC #198</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="easy"><div class="chk"></div><div class="prob-name">Min Cost Climbing Stairs</div><a class="prob-link" href="https://leetcode.com/problems/min-cost-climbing-stairs/" target="_blank" onclick="sp(event)">LC #746</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">House Robber II</div><a class="prob-link" href="https://leetcode.com/problems/house-robber-ii/" target="_blank" onclick="e(event)">LC #213 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Palindromic Substring</div><a class="prob-link" href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" onclick="e(event)">LC #5 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Coin Change</div><a class="prob-link" href="https://leetcode.com/problems/coin-change/" target="_blank" onclick="e(event)">LC #322 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Increasing Subsequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" onclick="e(event)">LC #300 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Unique Paths</div><a class="prob-link" href="https://leetcode.com/problems/unique-paths/" target="_blank" onclick="e(event)">LC #62 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Partition Equal Subset Sum</div><a class="prob-link" href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" onclick="e(event)">LC #416 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Decode Ways</div><a class="prob-link" href="https://leetcode.com/problems/decode-ways/" target="_blank" onclick="e(event)">LC #91 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Common Subsequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" onclick="e(event)">LC #1143 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">House Robber II</div><a class="prob-link" href="https://leetcode.com/problems/house-robber-ii/" target="_blank" onclick="sp(event)">LC #213</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Palindromic Substring</div><a class="prob-link" href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" onclick="sp(event)">LC #5</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Coin Change</div><a class="prob-link" href="https://leetcode.com/problems/coin-change/" target="_blank" onclick="sp(event)">LC #322</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Increasing Subsequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" onclick="sp(event)">LC #300</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Unique Paths</div><a class="prob-link" href="https://leetcode.com/problems/unique-paths/" target="_blank" onclick="sp(event)">LC #62</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Partition Equal Subset Sum</div><a class="prob-link" href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" onclick="sp(event)">LC #416</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Decode Ways</div><a class="prob-link" href="https://leetcode.com/problems/decode-ways/" target="_blank" onclick="sp(event)">LC #91</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Longest Common Subsequence</div><a class="prob-link" href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" onclick="sp(event)">LC #1143</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Edit Distance</div><a class="prob-link" href="https://leetcode.com/problems/edit-distance/" target="_blank" onclick="e(event)">LC #72 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Burst Balloons</div><a class="prob-link" href="https://leetcode.com/problems/burst-balloons/" target="_blank" onclick="e(event)">LC #312 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Distinct Subsequences</div><a class="prob-link" href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" onclick="e(event)">LC #115 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Edit Distance</div><a class="prob-link" href="https://leetcode.com/problems/edit-distance/" target="_blank" onclick="sp(event)">LC #72</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Burst Balloons</div><a class="prob-link" href="https://leetcode.com/problems/burst-balloons/" target="_blank" onclick="sp(event)">LC #312</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Distinct Subsequences</div><a class="prob-link" href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" onclick="sp(event)">LC #115</a></div>
       </div>
     </div>
 
-    <!-- WEEK 10 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Week 10</span>
-        <span class="week-name">Greedy & Advanced Graphs</span>
-        <span class="week-count" id="w10-count">0/14</span>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Pattern Tips</div>
-        <div class="tip">Greedy: prove local optimal choice leads to global optimal — use exchange argument</div>
-        <div class="tip">Dijkstra for weighted shortest path; Bellman-Ford when edges can be negative</div>
-        <div class="tip">MST: Kruskal (sort edges + union-find) or Prim (min-heap). Know both cold</div>
-      </div>
+      <div class="week-hdr"><span class="week-tag">Week 10</span><span class="week-name">Greedy and Advanced Graphs</span><span class="week-count" id="w10-count">0/14</span></div>
       <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Jump Game</div><a class="prob-link" href="https://leetcode.com/problems/jump-game/" target="_blank" onclick="e(event)">LC #55 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Jump Game II</div><a class="prob-link" href="https://leetcode.com/problems/jump-game-ii/" target="_blank" onclick="e(event)">LC #45 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Gas Station</div><a class="prob-link" href="https://leetcode.com/problems/gas-station/" target="_blank" onclick="e(event)">LC #134 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Hand of Straights</div><a class="prob-link" href="https://leetcode.com/problems/hand-of-straights/" target="_blank" onclick="e(event)">LC #846 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Partition Labels</div><a class="prob-link" href="https://leetcode.com/problems/partition-labels/" target="_blank" onclick="e(event)">LC #763 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Network Delay Time</div><a class="prob-link" href="https://leetcode.com/problems/network-delay-time/" target="_blank" onclick="e(event)">LC #743 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Path with Maximum Probability</div><a class="prob-link" href="https://leetcode.com/problems/path-with-maximum-probability/" target="_blank" onclick="e(event)">LC #1514 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Min Cost to Connect All Points</div><a class="prob-link" href="https://leetcode.com/problems/min-cost-to-connect-all-points/" target="_blank" onclick="e(event)">LC #1584 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Jump Game</div><a class="prob-link" href="https://leetcode.com/problems/jump-game/" target="_blank" onclick="sp(event)">LC #55</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Jump Game II</div><a class="prob-link" href="https://leetcode.com/problems/jump-game-ii/" target="_blank" onclick="sp(event)">LC #45</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Gas Station</div><a class="prob-link" href="https://leetcode.com/problems/gas-station/" target="_blank" onclick="sp(event)">LC #134</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Partition Labels</div><a class="prob-link" href="https://leetcode.com/problems/partition-labels/" target="_blank" onclick="sp(event)">LC #763</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Network Delay Time</div><a class="prob-link" href="https://leetcode.com/problems/network-delay-time/" target="_blank" onclick="sp(event)">LC #743</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Path with Maximum Probability</div><a class="prob-link" href="https://leetcode.com/problems/path-with-maximum-probability/" target="_blank" onclick="sp(event)">LC #1514</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Min Cost to Connect All Points</div><a class="prob-link" href="https://leetcode.com/problems/min-cost-to-connect-all-points/" target="_blank" onclick="sp(event)">LC #1584</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Hand of Straights</div><a class="prob-link" href="https://leetcode.com/problems/hand-of-straights/" target="_blank" onclick="sp(event)">LC #846</a></div>
       </div>
       <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Cheapest Flights Within K Stops</div><a class="prob-link" href="https://leetcode.com/problems/cheapest-flights-within-k-stops/" target="_blank" onclick="e(event)">LC #787 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Reconstruct Itinerary</div><a class="prob-link" href="https://leetcode.com/problems/reconstruct-itinerary/" target="_blank" onclick="e(event)">LC #332 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Critical Connections in a Network</div><a class="prob-link" href="https://leetcode.com/problems/critical-connections-in-a-network/" target="_blank" onclick="e(event)">LC #1192 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Candy</div><a class="prob-link" href="https://leetcode.com/problems/candy/" target="_blank" onclick="e(event)">LC #135 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Jump Game III</div><a class="prob-link" href="https://leetcode.com/problems/jump-game-iii/" target="_blank" onclick="e(event)">LC #1306 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Max Points on a Line</div><a class="prob-link" href="https://leetcode.com/problems/max-points-on-a-line/" target="_blank" onclick="e(event)">LC #149 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Cheapest Flights Within K Stops</div><a class="prob-link" href="https://leetcode.com/problems/cheapest-flights-within-k-stops/" target="_blank" onclick="sp(event)">LC #787</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Reconstruct Itinerary</div><a class="prob-link" href="https://leetcode.com/problems/reconstruct-itinerary/" target="_blank" onclick="sp(event)">LC #332</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Critical Connections in a Network</div><a class="prob-link" href="https://leetcode.com/problems/critical-connections-in-a-network/" target="_blank" onclick="sp(event)">LC #1192</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Candy</div><a class="prob-link" href="https://leetcode.com/problems/candy/" target="_blank" onclick="sp(event)">LC #135</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Max Points on a Line</div><a class="prob-link" href="https://leetcode.com/problems/max-points-on-a-line/" target="_blank" onclick="sp(event)">LC #149</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Jump Game III</div><a class="prob-link" href="https://leetcode.com/problems/jump-game-iii/" target="_blank" onclick="sp(event)">LC #1306</a></div>
       </div>
     </div>
 
-    <!-- WEEKS 11-12 -->
     <div class="week">
-      <div class="week-hdr">
-        <span class="week-tag">Weeks 11–12</span>
-        <span class="week-name">Mock Interviews & Weak Spot Grinding</span>
-        <span class="week-count" id="w11-count">0/18</span>
+      <div class="week-hdr"><span class="week-tag">Weeks 11-12</span><span class="week-name">Mock Interviews and Weak Spot Grinding</span><span class="week-count" id="w11-count">0/16</span></div>
+      <div class="schedule"><div class="schedule-title">// Final Phase Daily Schedule</div>
+        <div class="srow"><span class="stime">8-9:30 AM</span>2 timed Mediums, 25 min each, no hints</div>
+        <div class="srow"><span class="stime">11 AM-12:30</span>1 timed Hard, 45 min, attempt before looking</div>
+        <div class="srow"><span class="stime">3-4 PM</span>Re-do 2 problems from your mistakes log</div>
+        <div class="srow"><span class="stime">6-8 PM</span>Mock interview via Pramp or Interviewing.io</div>
       </div>
-      <div class="schedule">
-        <div class="schedule-title">// Final Phase Daily Schedule</div>
-        <div class="srow"><span class="stime">8–9:30 AM</span>2 timed Mediums — 25 min each, no hints</div>
-        <div class="srow"><span class="stime">11–12:30 PM</span>1 timed Hard — 45 min, attempt before looking at solution</div>
-        <div class="srow"><span class="stime">3–4 PM</span>Re-do 2 problems you failed from your notes journal</div>
-        <div class="srow"><span class="stime">6–8 PM</span>Mock interview (Pramp / Interviewing.io / peer)</div>
-      </div>
-      <div class="tips">
-        <div class="tips-title">// Final Tips</div>
-        <div class="tip">Revisit every problem you marked "didn't get it" in your notes — these are your weak spots</div>
-        <div class="tip">Practice talking out loud while coding. Silence kills in interviews</div>
-        <div class="tip">Before each mock: state constraints, give 1 brute force approach, then optimize</div>
-      </div>
-      <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM — High-Frequency Finals</span></div>
+      <div class="diff-hdr"><span class="dot dot-med"></span><span style="color:var(--med)">MEDIUM - High Frequency Finals</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Maximum Product Subarray</div><a class="prob-link" href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" onclick="e(event)">LC #152 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Word Break</div><a class="prob-link" href="https://leetcode.com/problems/word-break/" target="_blank" onclick="e(event)">LC #139 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Counting Bits</div><a class="prob-link" href="https://leetcode.com/problems/counting-bits/" target="_blank" onclick="e(event)">LC #338 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Missing Number</div><a class="prob-link" href="https://leetcode.com/problems/missing-number/" target="_blank" onclick="e(event)">LC #268 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Number of 1 Bits</div><a class="prob-link" href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" onclick="e(event)">LC #191 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Reverse Bits</div><a class="prob-link" href="https://leetcode.com/problems/reverse-bits/" target="_blank" onclick="e(event)">LC #190 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Rotate Image</div><a class="prob-link" href="https://leetcode.com/problems/rotate-image/" target="_blank" onclick="e(event)">LC #48 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Spiral Matrix</div><a class="prob-link" href="https://leetcode.com/problems/spiral-matrix/" target="_blank" onclick="e(event)">LC #54 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Set Matrix Zeroes</div><a class="prob-link" href="https://leetcode.com/problems/set-matrix-zeroes/" target="_blank" onclick="e(event)">LC #73 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Maximum Product Subarray</div><a class="prob-link" href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" onclick="sp(event)">LC #152</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Word Break</div><a class="prob-link" href="https://leetcode.com/problems/word-break/" target="_blank" onclick="sp(event)">LC #139</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Counting Bits</div><a class="prob-link" href="https://leetcode.com/problems/counting-bits/" target="_blank" onclick="sp(event)">LC #338</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Missing Number</div><a class="prob-link" href="https://leetcode.com/problems/missing-number/" target="_blank" onclick="sp(event)">LC #268</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Rotate Image</div><a class="prob-link" href="https://leetcode.com/problems/rotate-image/" target="_blank" onclick="sp(event)">LC #48</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Spiral Matrix</div><a class="prob-link" href="https://leetcode.com/problems/spiral-matrix/" target="_blank" onclick="sp(event)">LC #54</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="med"><div class="chk"></div><div class="prob-name">Set Matrix Zeroes</div><a class="prob-link" href="https://leetcode.com/problems/set-matrix-zeroes/" target="_blank" onclick="sp(event)">LC #73</a></div>
       </div>
-      <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD — Prestige Problems</span></div>
+      <div class="diff-hdr"><span class="dot dot-hard"></span><span style="color:var(--hard)">HARD - Prestige Problems</span></div>
       <div class="prob-list">
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Longest Valid Parentheses</div><a class="prob-link" href="https://leetcode.com/problems/longest-valid-parentheses/" target="_blank" onclick="e(event)">LC #32 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Regular Expression Matching</div><a class="prob-link" href="https://leetcode.com/problems/regular-expression-matching/" target="_blank" onclick="e(event)">LC #10 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Number of Ways to Form Target String</div><a class="prob-link" href="https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/" target="_blank" onclick="e(event)">LC #1639 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Maximal Rectangle</div><a class="prob-link" href="https://leetcode.com/problems/maximal-rectangle/" target="_blank" onclick="e(event)">LC #85 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Russian Doll Envelopes</div><a class="prob-link" href="https://leetcode.com/problems/russian-doll-envelopes/" target="_blank" onclick="e(event)">LC #354 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Shortest Path in a Grid with Obstacles Elimination</div><a class="prob-link" href="https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/" target="_blank" onclick="e(event)">LC #1293 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Stone Game</div><a class="prob-link" href="https://leetcode.com/problems/stone-game/" target="_blank" onclick="e(event)">LC #877 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Race Car</div><a class="prob-link" href="https://leetcode.com/problems/race-car/" target="_blank" onclick="e(event)">LC #818 ↗</a></div>
-        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Count of Smaller Numbers After Self</div><a class="prob-link" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/" target="_blank" onclick="e(event)">LC #315 ↗</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Longest Valid Parentheses</div><a class="prob-link" href="https://leetcode.com/problems/longest-valid-parentheses/" target="_blank" onclick="sp(event)">LC #32</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Regular Expression Matching</div><a class="prob-link" href="https://leetcode.com/problems/regular-expression-matching/" target="_blank" onclick="sp(event)">LC #10</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Maximal Rectangle</div><a class="prob-link" href="https://leetcode.com/problems/maximal-rectangle/" target="_blank" onclick="sp(event)">LC #85</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Russian Doll Envelopes</div><a class="prob-link" href="https://leetcode.com/problems/russian-doll-envelopes/" target="_blank" onclick="sp(event)">LC #354</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Count of Smaller Numbers After Self</div><a class="prob-link" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/" target="_blank" onclick="sp(event)">LC #315</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Shortest Path in Grid with Obstacles</div><a class="prob-link" href="https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/" target="_blank" onclick="sp(event)">LC #1293</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Race Car</div><a class="prob-link" href="https://leetcode.com/problems/race-car/" target="_blank" onclick="sp(event)">LC #818</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Stone Game</div><a class="prob-link" href="https://leetcode.com/problems/stone-game/" target="_blank" onclick="sp(event)">LC #877</a></div>
+        <div class="prob" onclick="toggle(this)" data-phase="3" data-diff="hard"><div class="chk"></div><div class="prob-name">Number of Ways to Form Target String</div><a class="prob-link" href="https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/" target="_blank" onclick="sp(event)">LC #1639</a></div>
       </div>
     </div>
   </div>
-</div><!-- /phase-3 -->
-
-<!-- ─── CHEAT SHEET ─── -->
+</div>
 <div class="cheatsheet">
-  <div class="cs-title">⚡ Pattern Cheat Sheet</div>
+  <div class="cs-title">Pattern Cheat Sheet</div>
   <div class="cs-grid">
-    <div class="cs-card">
-      <div class="cs-card-title">// Two Pointer</div>
-      <pre>l, r = 0, len(arr)-1
-while l < r:
-    if condition: l += 1
-    else: r -= 1</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// Sliding Window</div>
-      <pre>l = 0
+    <div class="cs-card"><div class="cs-card-title">// Two Pointer</div><pre>l, r = 0, len(arr)-1
+while l &lt; r:
+    if cond: l += 1
+    else: r -= 1</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// Sliding Window</div><pre>l = 0
 for r in range(len(s)):
-    # expand window
-    while invalid:
-        # shrink left
-        l += 1
-    # update answer</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// BFS</div>
-      <pre>from collections import deque
+    while invalid: l += 1
+    # update answer</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// BFS</div><pre>from collections import deque
 q = deque([start])
 visited = {start}
 while q:
@@ -766,195 +566,325 @@ while q:
     for nb in graph[node]:
         if nb not in visited:
             visited.add(nb)
-            q.append(nb)</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// DFS (recursive)</div>
-      <pre>def dfs(node, visited):
-    if node in visited: return
-    visited.add(node)
-    for nb in graph[node]:
-        dfs(nb, visited)</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// Backtracking</div>
-      <pre>def bt(start, path):
-    if done: results.append(path[:])
+            q.append(nb)</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// Backtracking</div><pre>def bt(start, path):
+    if done: res.append(path[:])
     for i in range(start, n):
         path.append(arr[i])
         bt(i+1, path)
-        path.pop()</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// Binary Search</div>
-      <pre>lo, hi = 0, len(arr)-1
-while lo <= hi:
-    mid = (lo + hi) // 2
-    if arr[mid] == target: return mid
-    elif arr[mid] < target: lo = mid+1
-    else: hi = mid-1</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// Union Find</div>
-      <pre>parent = list(range(n))
+        path.pop()</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// Binary Search</div><pre>lo, hi = 0, len(arr)-1
+while lo &lt;= hi:
+    mid = (lo+hi)//2
+    if arr[mid] == t: return mid
+    elif arr[mid] &lt; t: lo = mid+1
+    else: hi = mid-1</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// Union Find</div><pre>parent = list(range(n))
 def find(x):
     if parent[x] != x:
         parent[x] = find(parent[x])
     return parent[x]
-def union(x, y):
-    parent[find(x)] = find(y)</pre>
-    </div>
-    <div class="cs-card">
-      <div class="cs-card-title">// DP Template</div>
-      <pre># Define: dp[i] = ...
-# Base: dp[0] = ...
-# Transition: dp[i] = f(dp[i-1])
-dp = [0] * (n+1)
+def union(x,y):
+    parent[find(x)] = find(y)</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// DP Template</div><pre>dp = [0] * (n+1)
 dp[0] = base_case
 for i in range(1, n+1):
-    dp[i] = dp[i-1] + ...</pre>
+    dp[i] = dp[i-1] + ...</pre></div>
+    <div class="cs-card"><div class="cs-card-title">// Trie Node</div><pre>class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.end = False</pre></div>
+  </div>
+</div>
+</div><!-- /tab-tracker -->
+<!-- SUBMIT TAB -->
+<div class="tab-panel" id="tab-submit">
+<div class="submit-wrap">
+
+  <!-- PASSWORD GATE -->
+  <div id="pw-gate" class="pw-gate">
+    <div class="pw-gate-icon">&#128274;</div>
+    <div class="pw-gate-title">Restricted Access</div>
+    <div class="pw-gate-sub">This section is private. Enter your password to submit solutions, or request access below.</div>
+    <input type="password" class="pw-input" id="pw-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="pw-err" id="pw-err">Incorrect password. Try again.</div>
+    <button class="pw-btn" id="pw-btn" onclick="checkPw()">Unlock</button>
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">OR</div><div class="divider-line"></div></div>
+    <button class="req-btn" onclick="openModal()">Request Access</button>
+  </div>
+
+  <!-- AUTHENTICATED SUBMIT FORM -->
+  <div id="submit-form" style="display:none">
+    <div class="auth-header">
+      <div class="auth-status">&#128274; Authenticated - Jean Johnson</div>
+      <button class="auth-logout" onclick="logout()">Lock</button>
+    </div>
+    <div class="submit-intro">
+      <div class="submit-intro-title">Submit a Solution</div>
+      <div class="submit-intro-sub">Paste your URL and Python solution. Claude auto-detects the folder (<code>solutions/arrays/</code>, <code>solutions/trees/</code> etc.), pattern, complexity, and key insights, then commits to your <code>leetcode_buddy</code> repo and appends a row to <code>notes/patterns.md</code>.</div>
+    </div>
+    <div class="form-card">
+      <div class="form-section-title">// Problem</div>
+      <div class="field"><label>LeetCode URL</label><input type="url" id="lc-url" placeholder="https://leetcode.com/problems/two-sum/"></div>
+    </div>
+    <div class="form-card">
+      <div class="form-section-title">// Your Solution (Python)</div>
+      <div class="field"><label>Paste your solution code</label><textarea id="lc-solution" placeholder="def twoSum(self, nums, target):&#10;    seen = {}&#10;    for i, n in enumerate(nums):&#10;        if target - n in seen:&#10;            return [seen[target-n], i]&#10;        seen[n] = i"></textarea></div>
+    </div>
+    <div class="form-card">
+      <div class="form-section-title">// Your Reflection</div>
+      <div class="field"><label>Your insight - what clicked, what was hard?</label><textarea id="lc-insight" class="short" placeholder="e.g. Key was value-to-index not value-to-bool. Complement lookup makes it O(n)."></textarea></div>
+      <div class="field">
+        <label>Self-rating - how well could you do this cold?</label>
+        <div class="star-row">
+          <span class="star" onclick="rate(1)">&#11088;</span>
+          <span class="star" onclick="rate(2)">&#11088;</span>
+          <span class="star" onclick="rate(3)">&#11088;</span>
+          <span class="star" onclick="rate(4)">&#11088;</span>
+          <span class="star" onclick="rate(5)">&#11088;</span>
+          <span class="star-label" id="star-label">Click to rate</span>
+        </div>
+      </div>
+    </div>
+    <button class="submit-btn" id="submit-btn" onclick="submitSolution()">Enrich and Commit to GitHub</button>
+    <div class="result-card" id="result-card"><div class="result-title" id="result-title"></div><div id="result-body"></div></div>
+    <div class="history-section">
+      <div class="history-title">// Submission History</div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+  </div>
+
+</div>
+</div><!-- /tab-submit -->
+
+<footer>Jean Johnson &nbsp;|&nbsp; LeetCode Master Plan &nbsp;|&nbsp; 12 Weeks &nbsp;|&nbsp; Progress saves locally in your browser</footer>
+</div><!-- /wrap -->
+
+<!-- REQUEST ACCESS MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="bgClose(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">x</button>
+    <div id="modal-inner">
+      <div class="modal-title">Request Access</div>
+      <div class="modal-sub">Send a request to Jean at jajoh151@asu.edu. She will share the password if approved.</div>
+      <div class="modal-field"><label>Your Name</label><input type="text" id="req-name" placeholder="Your full name"></div>
+      <div class="modal-field"><label>Your Email</label><input type="email" id="req-email" placeholder="your@email.com"></div>
+      <div class="modal-field"><label>Why do you want access?</label><textarea id="req-reason" placeholder="e.g. I am also grinding LeetCode and would love to compare approaches..."></textarea></div>
+      <div class="modal-btns">
+        <button class="modal-send" id="modal-send-btn" onclick="sendRequest()">Send Request</button>
+        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
-
-<footer>
-  Jean Johnson · LeetCode Master Plan · 12 Weeks · Built with 🔥 · Progress saves to localStorage
-</footer>
-
-</div><!-- /wrap -->
-
 <script>
-// ─── STORAGE ───
-const KEY = 'lc_master_v2';
-const STREAK_KEY = 'lc_streak_v2';
+// == CONFIG - update after deploying ==
+const NETLIFY_FN  = '/.netlify/functions/enrich';
+const AUTH_FN     = '/.netlify/functions/auth';
+const EMAILJS_SVC = 'leetcode_buddy_service';   // from emailjs.com
+const EMAILJS_TPL = 'template_xx6muph';  // from emailjs.com
+const EMAILJS_KEY = 'O0eXh3zrSim7Ss0K1';   // from emailjs.com
 
-function loadState() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+// == STORAGE ==
+const KEY='lc_v3',SK='lc_streak_v2',HK='lc_hist_v1',AK='lc_auth_session';
+const ls = (k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d;}catch{return d;}};
+const ss = (k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const isAuthed = ()=>sessionStorage.getItem(AK)==='1';
+const setAuthed = ()=>sessionStorage.setItem(AK,'1');
+const clearAuth = ()=>sessionStorage.removeItem(AK);
+
+// == TABS ==
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['tracker','submit'][i]===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='submit'){ isAuthed()?showForm():showGate(); renderHistory(); }
 }
 
-function saveState(s) {
-  localStorage.setItem(KEY, JSON.stringify(s));
+// == PASSWORD ==
+function showGate(){ document.getElementById('pw-gate').style.display='block'; document.getElementById('submit-form').style.display='none'; }
+function showForm(){ document.getElementById('pw-gate').style.display='none'; document.getElementById('submit-form').style.display='block'; }
+async function checkPw(){
+  const pw=document.getElementById('pw-input').value;
+  if(!pw) return;
+  const btn=document.getElementById('pw-btn');
+  btn.disabled=true; btn.textContent='Checking...';
+  const errEl=document.getElementById('pw-err');
+  errEl.style.display='none';
+  try{
+    const res=await fetch(AUTH_FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw})});
+    const data=await res.json();
+    if(data.ok){ setAuthed(); showForm(); renderHistory(); }
+    else{ errEl.style.display='block'; document.getElementById('pw-input').value=''; }
+  }catch(e){
+    errEl.textContent='Cannot reach server. Deploy Netlify first.';
+    errEl.style.display='block';
+  }finally{ btn.disabled=false; btn.textContent='Unlock'; }
+}
+function logout(){ clearAuth(); showGate(); }
+
+// == MODAL ==
+let savedModalHTML='';
+function openModal(){ document.getElementById('modal-overlay').classList.add('show'); }
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('show');
+  if(savedModalHTML) document.getElementById('modal-inner').innerHTML=savedModalHTML;
+}
+function bgClose(e){ if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+async function sendRequest(){
+  const name=document.getElementById('req-name').value.trim();
+  const email=document.getElementById('req-email').value.trim();
+  const reason=document.getElementById('req-reason').value.trim();
+  if(!name||!email||!reason){alert('Please fill in all fields.');return;}
+  const btn=document.getElementById('modal-send-btn');
+  btn.disabled=true; btn.textContent='Sending...';
+  try{
+    await emailjs.send(EMAILJS_SVC, EMAILJS_TPL, {
+      to_email:'jajoh151@asu.edu', from_name:name, from_email:email,
+      message:reason, reply_to:email
+    });
+    document.getElementById('modal-inner').innerHTML=
+      '<div class="modal-ok"><div style="font-size:2rem;margin-bottom:12px">&#9989;</div>'+
+      '<div class="modal-title" style="margin-bottom:8px">Request Sent!</div>'+
+      '<div class="modal-sub">Jean will be in touch at '+email+' if approved.</div>'+
+      '<button class="modal-cancel" style="margin-top:20px;width:100%" onclick="closeModal()">Close</button></div>';
+  }catch(e){
+    btn.disabled=false; btn.textContent='Send Request';
+    alert('Send failed. Please email jajoh151@asu.edu directly.');
+  }
 }
 
-function loadStreak() {
-  try { return JSON.parse(localStorage.getItem(STREAK_KEY)) || {count:0, last:null}; } catch { return {count:0,last:null}; }
-}
-
-function saveStreak(s) {
-  localStorage.setItem(STREAK_KEY, JSON.stringify(s));
-}
-
-// ─── TOGGLE PROBLEM ───
-function toggle(el) {
+// == TRACKER ==
+function toggle(el){
   el.classList.toggle('done');
-  const state = loadState();
-  const id = el.querySelector('.prob-name').textContent;
-  state[id] = el.classList.contains('done');
-  saveState(state);
-  updateAll();
+  const state=ls(KEY,{}), id=el.querySelector('.prob-name').textContent;
+  state[id]=el.classList.contains('done'); ss(KEY,state); updateAll();
 }
-
-function e(ev) { ev.stopPropagation(); }
-
-// ─── PHASE TOGGLE ───
-function togglePhase(id) {
-  document.getElementById(id).classList.toggle('open');
-}
-
-// ─── RESTORE STATE ───
-function restoreState() {
-  const state = loadState();
-  document.querySelectorAll('.prob').forEach(el => {
-    const id = el.querySelector('.prob-name').textContent;
-    if (state[id]) el.classList.add('done');
+function sp(ev){ev.stopPropagation();}
+function togglePhase(id){document.getElementById(id).classList.toggle('open');}
+function restoreState(){
+  const state=ls(KEY,{});
+  document.querySelectorAll('.prob').forEach(el=>{
+    if(state[el.querySelector('.prob-name').textContent]) el.classList.add('done');
   });
 }
-
-// ─── UPDATE ALL COUNTERS ───
-function updateAll() {
-  // Phase totals
-  const phases = [
-    {id:'phase-1', total:68, statId:'p1-stat', barId:'p1-bar', pctId:'p1-pct'},
-    {id:'phase-2', total:60, statId:'p2-stat', barId:'p2-bar', pctId:'p2-pct'},
-    {id:'phase-3', total:46, statId:'p3-stat', barId:'p3-bar', pctId:'p3-pct'},
+function updateAll(){
+  const phases=[
+    {id:'phase-1',sid:'p1-stat',bid:'p1-bar',pid:'p1-pct'},
+    {id:'phase-2',sid:'p2-stat',bid:'p2-bar',pid:'p2-pct'},
+    {id:'phase-3',sid:'p3-stat',bid:'p3-bar',pid:'p3-pct'},
   ];
-
-  let totalDone = 0;
-  let totalAll = 0;
-  let easyDone = 0, medDone = 0, hardDone = 0;
-
-  phases.forEach(p => {
-    const section = document.getElementById(p.id);
-    const done = section.querySelectorAll('.prob.done').length;
-    const all = section.querySelectorAll('.prob').length;
-    const pct = all ? Math.round(done/all*100) : 0;
-    document.getElementById(p.statId).innerHTML = `<b>${done}</b>/${all} done`;
-    document.getElementById(p.barId).style.width = pct + '%';
-    document.getElementById(p.pctId).textContent = pct + '%';
-    totalDone += done;
-    totalAll += all;
+  let td=0,ta=0,ed=0,md=0,hd=0;
+  phases.forEach(p=>{
+    const s=document.getElementById(p.id);
+    const done=s.querySelectorAll('.prob.done').length, all=s.querySelectorAll('.prob').length;
+    const pct=all?Math.round(done/all*100):0;
+    document.getElementById(p.sid).innerHTML='<b>'+done+'</b>/'+all+' done';
+    document.getElementById(p.bid).style.width=pct+'%';
+    document.getElementById(p.pid).textContent=pct+'%';
+    td+=done; ta+=all;
   });
-
-  // Week counts
-  const weeks = ['w1','w2','w3','w4','w5','w6','w7','w8','w9','w10','w11'];
-  weeks.forEach(w => {
-    const el = document.getElementById(w+'-count');
-    if (!el) return;
-    // find parent week
-    const weekDiv = el.closest('.week');
-    if (!weekDiv) return;
-    const done = weekDiv.querySelectorAll('.prob.done').length;
-    const all = weekDiv.querySelectorAll('.prob').length;
-    el.textContent = `${done}/${all}`;
+  ['w1','w2','w3','w4','w5','w6','w7','w8','w9','w10','w11'].forEach(w=>{
+    const el=document.getElementById(w+'-count'); if(!el) return;
+    const wd=el.closest('.week'); if(!wd) return;
+    el.textContent=wd.querySelectorAll('.prob.done').length+'/'+wd.querySelectorAll('.prob').length;
   });
-
-  // Difficulty counts
-  document.querySelectorAll('.prob.done').forEach(el => {
-    const d = el.getAttribute('data-diff');
-    if (d === 'easy') easyDone++;
-    else if (d === 'med') medDone++;
-    else if (d === 'hard') hardDone++;
+  document.querySelectorAll('.prob.done').forEach(el=>{
+    const d=el.getAttribute('data-diff');
+    if(d==='easy')ed++; else if(d==='med')md++; else if(d==='hard')hd++;
   });
-
-  document.getElementById('cnt-easy').textContent = easyDone;
-  document.getElementById('cnt-med').textContent = medDone;
-  document.getElementById('cnt-hard').textContent = hardDone;
-  document.getElementById('cnt-total').textContent = totalDone;
-
-  // Master bar
-  const masterPct = totalAll ? Math.round(totalDone/totalAll*100) : 0;
-  document.getElementById('master-pct').textContent = masterPct + '%';
-  document.getElementById('master-bar').style.width = masterPct + '%';
-
-  // Streak
-  const streak = loadStreak();
-  document.getElementById('cnt-streak').textContent = streak.count;
-  if (streak.count > 0) {
-    document.getElementById('streak-label').textContent = `🔥 ${streak.count}-day streak — keep it alive!`;
-  }
+  document.getElementById('cnt-easy').textContent=ed;
+  document.getElementById('cnt-med').textContent=md;
+  document.getElementById('cnt-hard').textContent=hd;
+  document.getElementById('cnt-total').textContent=td;
+  const mp=ta?Math.round(td/ta*100):0;
+  document.getElementById('master-pct').textContent=mp+'%';
+  document.getElementById('master-bar').style.width=mp+'%';
+  const streak=ls(SK,{count:0,last:null});
+  document.getElementById('cnt-streak').textContent=streak.count;
+  if(streak.count>0) document.getElementById('streak-label').textContent='&#128293; '+streak.count+'-day streak - keep it alive!';
+}
+function markToday(){
+  const streak=ls(SK,{count:0,last:null}), today=new Date().toDateString();
+  if(streak.last===today){alert('Already marked today! Come back tomorrow.');return;}
+  const yesterday=new Date(Date.now()-86400000).toDateString();
+  streak.count=(streak.last===yesterday)?streak.count+1:1;
+  streak.last=today; ss(SK,streak); updateAll();
+  document.getElementById('streak-label').textContent='&#128293; '+streak.count+'-day streak - keep grinding!';
 }
 
-// ─── STREAK ───
-function markToday() {
-  const streak = loadStreak();
-  const today = new Date().toDateString();
-  if (streak.last === today) {
-    alert("✅ Already marked today! Come back tomorrow.");
-    return;
-  }
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (streak.last === yesterday) {
-    streak.count++;
-  } else if (streak.last === null || streak.last !== yesterday) {
-    streak.count = 1;
-  }
-  streak.last = today;
-  saveStreak(streak);
-  updateAll();
-  document.getElementById('streak-label').textContent = `🔥 ${streak.count}-day streak — keep grinding!`;
+// == STARS ==
+let stars=0;
+function rate(n){
+  stars=n;
+  document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('lit',i<n));
+  const lbl=['','Could not solve cold','Needed many hints','Solved with struggle','Solved confidently','Would crush it cold'];
+  document.getElementById('star-label').textContent=lbl[n];
 }
 
-// ─── INIT ───
+// == SUBMIT ==
+async function submitSolution(){
+  if(!isAuthed()){showGate();return;}
+  const url=document.getElementById('lc-url').value.trim();
+  const solution=document.getElementById('lc-solution').value.trim();
+  const insight=document.getElementById('lc-insight').value.trim();
+  if(!url||!solution||!insight||!stars){alert('Please fill in all fields and rate your solution.');return;}
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.textContent='Enriching with Claude...';
+  const card=document.getElementById('result-card');
+  card.className='result-card'; card.style.display='none';
+  try{
+    const res=await fetch(NETLIFY_FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({leetcodeUrl:url,solution,insight,stars})});
+    const data=await res.json();
+    if(!res.ok||!data.success) throw new Error(data.error||'Something went wrong.');
+    const ss2='&#11088;'.repeat(data.stars)+'&#9734;'.repeat(5-data.stars);
+    card.className='result-card success show'; card.style.display='block';
+    document.getElementById('result-title').className='result-title ok';
+    document.getElementById('result-title').textContent='Committed: '+data.problem_name+' (LC #'+data.problem_number+')';
+    document.getElementById('result-body').innerHTML=
+      '<div class="result-grid">'+
+      '<div class="result-item"><div class="result-item-label">Pattern</div><div class="result-item-val">'+data.pattern+'</div></div>'+
+      '<div class="result-item"><div class="result-item-label">Folder</div><div class="result-item-val">solutions/'+data.folder+'/</div></div>'+
+      '<div class="result-item"><div class="result-item-label">Time</div><div class="result-item-val">'+data.time_complexity+'</div></div>'+
+      '<div class="result-item"><div class="result-item-label">Space</div><div class="result-item-val">'+data.space_complexity+'</div></div>'+
+      '<div class="result-item"><div class="result-item-label">Difficulty</div><div class="result-item-val">'+data.difficulty+'</div></div>'+
+      '<div class="result-item"><div class="result-item-label">Rating</div><div class="result-item-val">'+ss2+'</div></div>'+
+      '</div>'+
+      '<div class="result-approach"><strong>Approach:</strong> '+data.approach+'</div>'+
+      '<div class="result-insight-box">Key insight: '+data.key_insight+'</div>'+
+      '<span class="revisit-badge '+(data.revisit?'revisit-yes':'revisit-no')+'">'+(data.revisit?'Add to revisit list':'No revisit needed')+'</span>'+
+      '<br><a class="result-link" href="https://github.com/jean-johnson-zwix/leetcode_buddy/blob/main/'+data.file_path+'" target="_blank">View on GitHub</a>';
+    const hist=ls(HK,[]);
+    if(!Array.isArray(hist)) hist=[];
+    hist.unshift({name:data.problem_name,number:data.problem_number,pattern:data.pattern,stars:data.stars,date:new Date().toISOString().split('T')[0],revisit:data.revisit});
+    ss(HK,hist.slice(0,50)); renderHistory();
+    document.getElementById('lc-url').value='';
+    document.getElementById('lc-solution').value='';
+    document.getElementById('lc-insight').value='';
+    stars=0; document.querySelectorAll('.star').forEach(s=>s.classList.remove('lit'));
+    document.getElementById('star-label').textContent='Click to rate';
+  }catch(err){
+    card.className='result-card error show'; card.style.display='block';
+    document.getElementById('result-title').className='result-title err';
+    document.getElementById('result-title').textContent='Submission failed';
+    document.getElementById('result-body').innerHTML='<div style="font-size:13px;color:var(--muted)">'+err.message+'<br><br>Check Netlify deployment and env vars.</div>';
+  }finally{ btn.disabled=false; btn.textContent='Enrich and Commit to GitHub'; }
+}
+
+// == HISTORY ==
+function renderHistory(){
+  const el=document.getElementById('history-list'); if(!el) return;
+  const hist=ls(HK,[]);
+  const list=Array.isArray(hist)?hist:[];
+  if(!list.length){el.innerHTML='<div class="history-empty">No submissions yet.</div>';return;}
+  el.innerHTML=list.map(h=>'<div class="history-item"><div class="history-name">'+h.name+' <span style="color:var(--muted);font-size:11px">#'+h.number+'</span></div><div class="history-pattern">'+h.pattern+'</div><div class="history-stars">'+'&#11088;'.repeat(h.stars)+'</div>'+(h.revisit?'<span style="font-size:10px;color:var(--hard)">revisit</span>':'')+'<div class="history-date">'+h.date+'</div></div>').join('');
+}
+
+// == INIT ==
+document.addEventListener('DOMContentLoaded',()=>{
+  savedModalHTML=document.getElementById('modal-inner').innerHTML;
+  if(typeof emailjs!=='undefined') emailjs.init(EMAILJS_KEY);
+});
 restoreState();
 updateAll();
 </script>
