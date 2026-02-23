@@ -87,7 +87,7 @@ exports.handler = async (event) => {
   }
 
   // ── 1. Ask Gemini to enrich the solution ──
-  const prompt = `You are a LeetCode solution metadata generator. Analyze the following and respond ONLY with a valid JSON object — no markdown, no explanation, no backticks.
+  const prompt = `You are a LeetCode expert. Analyze the following and respond ONLY with a valid JSON object — no markdown, no explanation, no backticks.
 
 LeetCode URL: ${leetcodeUrl}
 Solution (Python): 
@@ -116,7 +116,7 @@ Return this exact JSON structure:
 
   const geminiRes = await post(
     "generativelanguage.googleapis.com",
-    `/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+    `/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
     { "Content-Type": "application/json" },
     {
       contents: [{ parts: [{ text: prompt }] }],
@@ -207,7 +207,7 @@ ${solution}
   const newContent = currentContent.trimEnd() + "\n" + meta.patterns_md_entry + "\n";
 
   const patternsPayload = {
-    message: `📝 Update patterns.md: ${meta.problem_name}`,
+    message: `Update patterns.md: ${meta.problem_name}`,
     content: Buffer.from(newContent).toString("base64"),
     ...(patternsSha ? { sha: patternsSha } : {}),
   };
