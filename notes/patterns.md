@@ -10,3 +10,4 @@ A running log of every problem solved, organized by pattern.
 | Maximum Average Subarray I (#643) | Sliding Window | Fixed-size window; update sum by subtracting old, adding new; track max average | O(n) | O(1) | ⭐⭐⭐ |
 | Longest Substring Without Repeating Characters (#3) | Sliding Window | Use a hash set to track characters in a dynamic window; shrink from left if duplicate | O(n) | O(min(n, A)) | ⭐⭐⭐ |
 | Find All Anagrams in a String (#438) | Sliding Window, HashMap | Fixed-size window with frequency maps for anagram check | O(N) | O(1) | ⭐⭐⭐ |
+| Max Consecutive Ones III (#1004) | Sliding Window | Maintain window with at most k zeros; expand right, shrink left if invalid | O(n) | O(1) | ⭐⭐⭐⭐ |
