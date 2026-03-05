@@ -14,3 +14,4 @@ A running log of every problem solved, organized by pattern.
 | Fruit Into Baskets (#904) | Sliding Window | Find longest subarray with at most 2 distinct elements using a frequency map | O(n) | O(1) | ⭐⭐⭐⭐ |
 | Path Sum (#112) | DFS | Recursively subtract node value from target sum; check for zero at leaf | O(N) | O(H) | ⭐⭐⭐⭐ |
 | Binary Search (#704) | Binary Search | Iteratively halve search space; adjust left/right pointers | O(log n) | O(1) | ⭐⭐⭐⭐ |
+| Search in Rotated Sorted Array (#33) | Binary Search | Modified binary search; identify sorted half, then check target range | O(log n) | O(1) | ⭐⭐⭐ |
