@@ -9,3 +9,4 @@ A running log of every problem solved, organized by pattern.
 | Longest Consecutive Sequence (#128) | HashMap | Use a hash set to store numbers; only start sequence count if n-1 not present | O(n) | O(n) | ⭐⭐⭐ |
 | Maximum Average Subarray I (#643) | Sliding Window | Fixed-size window; update sum by subtracting old, adding new; track max average | O(n) | O(1) | ⭐⭐⭐ |
 | Longest Substring Without Repeating Characters (#3) | Sliding Window | Use a hash set to track characters in a dynamic window; shrink from left if duplicate | O(n) | O(min(n, A)) | ⭐⭐⭐ |
+| Find All Anagrams in a String (#438) | Sliding Window, HashMap | Fixed-size window with frequency maps for anagram check | O(N) | O(1) | ⭐⭐⭐ |
