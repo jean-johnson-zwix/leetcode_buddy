@@ -11,3 +11,4 @@ A running log of every problem solved, organized by pattern.
 | Longest Substring Without Repeating Characters (#3) | Sliding Window | Use a hash set to track characters in a dynamic window; shrink from left if duplicate | O(n) | O(min(n, A)) | ⭐⭐⭐ |
 | Find All Anagrams in a String (#438) | Sliding Window, HashMap | Fixed-size window with frequency maps for anagram check | O(N) | O(1) | ⭐⭐⭐ |
 | Max Consecutive Ones III (#1004) | Sliding Window | Maintain window with at most k zeros; expand right, shrink left if invalid | O(n) | O(1) | ⭐⭐⭐⭐ |
+| Fruit Into Baskets (#904) | Sliding Window | Find longest subarray with at most 2 distinct elements using a frequency map | O(n) | O(1) | ⭐⭐⭐⭐ |
