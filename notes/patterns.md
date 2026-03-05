@@ -19,3 +19,4 @@ A running log of every problem solved, organized by pattern.
 | Balanced Binary Tree (#110) | DFS | Recursively compute height and check balance at each node; use non-local flag for overall balance | O(N) | O(H) | ⭐⭐⭐ |
 | First Bad Version (#278) | Binary Search | Find first true using `while left < right`, `right = mid` if true, `left = mid + 1` if false | O(log n) | O(1) | ⭐⭐⭐ |
 | Two Sum II - Input Array Is Sorted (#167) | Two Pointer | Use two pointers from ends of sorted array; adjust based on sum vs target | O(n) | O(1) | ⭐⭐⭐⭐ |
+| 3Sum (#15) | Two Pointer | Sort array, fix one element, use two pointers for the rest, handle duplicates carefully | O(n^2) | O(n) | ⭐⭐ |
