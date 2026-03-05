@@ -12,3 +12,4 @@ A running log of every problem solved, organized by pattern.
 | Find All Anagrams in a String (#438) | Sliding Window, HashMap | Fixed-size window with frequency maps for anagram check | O(N) | O(1) | ⭐⭐⭐ |
 | Max Consecutive Ones III (#1004) | Sliding Window | Maintain window with at most k zeros; expand right, shrink left if invalid | O(n) | O(1) | ⭐⭐⭐⭐ |
 | Fruit Into Baskets (#904) | Sliding Window | Find longest subarray with at most 2 distinct elements using a frequency map | O(n) | O(1) | ⭐⭐⭐⭐ |
+| Path Sum (#112) | DFS | Recursively subtract node value from target sum; check for zero at leaf | O(N) | O(H) | ⭐⭐⭐⭐ |
