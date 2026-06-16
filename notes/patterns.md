@@ -21,3 +21,4 @@ A running log of every problem solved, organized by pattern.
 | Two Sum II - Input Array Is Sorted (#167) | Two Pointer | Use two pointers from ends of sorted array; adjust based on sum vs target | O(n) | O(1) | ⭐⭐⭐⭐ |
 | 3Sum (#15) | Two Pointer | Sort array, fix one element, use two pointers for the rest, handle duplicates carefully | O(n^2) | O(n) | ⭐⭐ |
 | Valid Anagram (#242) | HashMap | Count character frequencies for both strings and compare | O(n) | O(n) | ⭐⭐⭐⭐⭐ |
+| Top K Frequent Elements (#347) | Heap | Use a min-heap to store (frequency, element) pairs, maintaining a size of k. | O(n log k) | O(n) | ⭐⭐⭐ |
